@@ -33,18 +33,44 @@ class App extends Component {
        */
       this.allTasks = [
           {
-              name: 'ex task 1',
+              name: 'breath',
               completedDuration: {
                 hr: 0,
                 min: 0,
                 sec: 0
               },
               totalDuration: {
-                  hr: 0,
-                  min: 15,
-                  sec: 0
+                  hr: 23,
+                  min: 59,
+                  sec: 59
               }
-          }
+          },
+          {
+            name: 'sleep',
+            completedDuration: {
+              hr: 0,
+              min: 0,
+              sec: 0
+            },
+            totalDuration: {
+                hr: 8,
+                min: 0,
+                sec: 0
+            }
+          },
+          {
+            name: 'code',
+            completedDuration: {
+              hr: 0,
+              min: 0,
+              sec: 0
+            },
+            totalDuration: {
+                hr: 10,
+                min: 0,
+                sec: 0
+            }
+          }         
       ];
 
       /**
@@ -52,6 +78,7 @@ class App extends Component {
        */
       this.state = {
           displayMenu: false,
+
           selectedTask: {
             name: 'ex task 1',
             completedDuration: {
@@ -68,6 +95,8 @@ class App extends Component {
       };
 
       this.onMenu = this.onMenu.bind(this); //toggles task menu
+      this.onTaskSelect = this.onTaskSelect.bind(this); //selects the clicked task in the menu
+
       this.onClose = this.onClose.bind(this); //closes electron
   }
 
@@ -77,6 +106,34 @@ class App extends Component {
     this.setState({
       displayMenu: !this.state.displayMenu
     });
+  }
+
+  onTaskSelect(e) {
+    try {
+      e.preventDefault();
+      console.log('\n*ENTERING onTaskSelect()');
+      console.log(`onTaskSelect selection: ${e.currentTarget.id}`);
+
+      let selectedTask = this.allTasks.filter( task => task.name === e.currentTarget.id );
+
+      if( selectedTask ) {
+        console.log('onTaskSelect(): updating task selection');
+        console.log(`onTaskSelect selection: ${JSON.stringify(selectedTask)}`);        
+        
+        this.setState({ 
+          selectedTask: selectedTask[0],
+          displayMenu: false //closes menu once a new task is selected
+         });
+         
+      }
+
+      else {
+        console.log(`onTaskSelect(): selected task not found: ${selectedTask}`);
+      }
+    }
+    catch(err) {
+      console.log(`***ERR onTaskSelect(): ${err.message}`);
+    }
   }
 
   onClose(e) {
@@ -98,7 +155,7 @@ class App extends Component {
         <div className='wrapper'>
             <link rel='stylesheet' href='./themes/dark-theme.css' />
             <Titlebar onMenu={this.onMenu} onClose={this.onClose} />
-            <TaskView task={this.state.selectedTask} allTasks={this.allTasks} displayMenu={this.state.displayMenu} />
+            <TaskView task={this.state.selectedTask} allTasks={this.allTasks} displayMenu={this.state.displayMenu} onSelect={this.onTaskSelect} />
         </div>
     );
   }

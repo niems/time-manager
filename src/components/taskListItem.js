@@ -13,11 +13,11 @@ function formatDuration(duration) {
     return ( duration.hr + ':' + duration.min + ':' + duration.sec );
 }
 
-const TaskListItem = ({ task }) => {
+const TaskListItem = ({ task, onSelect }) => {
     return (
-        <li className='task-list-item-container'>
+        <li className='task-list-item-container' id={task.name} onClick={onSelect}>
                 <span className='task-item-name'>{task.name}</span>
-                <span className='task-item-duration'>{formatDuration(task.duration)}</span>
+                <span className='task-item-duration'>{formatDuration(task.totalDuration)}</span>
         </li>
     );
 }

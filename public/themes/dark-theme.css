@@ -9,6 +9,12 @@
 
     
     --titlebar-bg: var(--sixth);
+
+    --task-menu-bg: var(--main);
+    --task-menu-list-bg: var(--ten);
+    --task-menu-item-bg: var(--main);
+    --task-menu-item-fg: var(--accent);   
+    --task-menu-item-border: var(--sixth);
     
     --task-view-bg: var(--main);
 

@@ -112,7 +112,7 @@ class TaskView extends Component {
         if ( this.props.task ) {
             return (
                 <div id='taskView'>
-                    {this.props.displayMenu ? <TaskMenu allTasks={this.props.allTasks} /> : null}
+                    {this.props.displayMenu ? <TaskMenu allTasks={JSON.parse(JSON.stringify(this.props.allTasks))} onSelect={this.props.onSelect} /> : null}
 
                     <h2 id='task-name'>{this.props.task.name}</h2>
                     <TaskArcDisplay hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} />

@@ -1,16 +1,31 @@
 .task-list-item-container {
     box-sizing: border-box;
-    width: 100%;
+    width: 90%;
+    height: max-content;
+    
+    padding: 10px;
+    margin: 5px 0px;
+    
+    border-radius: 10px;
+    border-style: inset;
+    border-width: 1px;
+    border-color: var(--ten);
 
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-evenly;
     align-items: center;
 
-    padding: 5px;
-    margin: 2px 0px;
 
-    background: gray;
+    background: var(--task-menu-item-bg);
+    color: var(--ten);
+
+    transition: all 0.4s;
+}
+
+.task-list-item-container:hover {
+    color: var(--accent);
+    transform: scale(1.1, 1.1);
 }
 
 .task-item-name {
