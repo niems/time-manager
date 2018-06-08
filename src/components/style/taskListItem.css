@@ -1,26 +1,27 @@
 .task-list-item-container {
     box-sizing: border-box;
-    width: 90%;
+    width: 75%;
     height: max-content;
     
     padding: 10px;
-    margin: 5px 0px;
+    margin: 10px 0px;
     
     border-radius: 10px;
     border-style: inset;
     border-width: 1px;
-    border-color: var(--ten);
-
+    
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-evenly;
     align-items: center;
-
-
+    
+    
     background: var(--task-menu-item-bg);
+    border-color: var(--task-menu-item-border);
     color: var(--ten);
+    box-shadow: -2px 2px 4px black;
 
-    transition: all 0.4s;
+    transition: all 0.3s;
 }
 
 .task-list-item-container:hover {
@@ -29,10 +30,10 @@
 }
 
 .task-item-name {
-    font-size: 1em;
+    font-size: 1.05em;
     font-variant: small-caps;
 }
 
 .task-item-duration {
-    font-size: 1em;
+    font-size: 1.05em;
 }

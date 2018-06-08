@@ -31,7 +31,11 @@
 
     padding: 10px 0px;
     margin: 0px;
-    border-radius: 10px;
+
+    border-radius: 15px;
+    border-style: none solid none solid;
+    border-width: 2px;
+    border-color: black;
 
     background: var(--task-menu-list-bg);
     opacity: 0.9;
