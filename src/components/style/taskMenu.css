@@ -1,0 +1,32 @@
+#task-menu-container {
+    position: absolute;
+    width: inherit;
+    height: 100%;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 5;
+    overflow: hidden;
+
+    background: white;
+    opacity: 0.6;
+}
+
+#task-menu-list {
+    width: 100%;
+    height: 80%;
+    list-style-type: none;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+
+    padding: 0px;
+    margin: 0px;
+
+    background: green;
+}

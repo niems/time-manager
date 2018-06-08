@@ -1,0 +1,26 @@
+:root {
+    --main: #2C3037;
+    --ten: #DDDDDD;
+    --accent: #58D9FA;
+    --sixth: #25282E;
+    --seventh:#363A40;
+
+    --text-fg: #DDFFFF;
+
+    
+    --titlebar-bg: var(--sixth);
+    
+    --task-view-bg: var(--main);
+
+    --task-header-bg: inherit;
+    --task-header-fg: var(--text-fg);
+
+    --task-arc-display-bg: var(--seventh);
+
+    --task-duration-text: var(--text-fg);
+
+    --task-options-bg: var(--main);
+    --task-options-border: var(--seventh);
+    --task-options-button-bg: inherit;
+    --task-options-button-hover-bg: var(--sixth);
+}

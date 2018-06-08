@@ -1,0 +1,23 @@
+#task-arc-display-container {
+    box-sizing: border-box;
+    width: max-content;  
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    flex: 1 auto;
+
+    background: inherit;
+}
+
+#task-arc-display {
+    box-sizing: border-box;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    padding-right: 10px;
+}

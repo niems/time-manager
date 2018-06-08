@@ -1,0 +1,46 @@
+#taskView {    
+    position: relative;
+    width: inherit;
+    overflow: hidden;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    flex: 1 auto;
+
+    margin: 0px;
+    padding: 0px;
+
+    background: var(--task-view-bg);
+}
+
+#task-name {
+    font-variant: small-caps;
+
+    background: var(--task-header-bg);
+    color: var(--task-header-fg);
+}
+
+#task-duration-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 1.1em;
+    color: var(--task-duration-text);
+}
+
+#current-duration {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+#task-duration-separator {
+    font-weight: bold;
+}
+
+#total-duration {
+    margin-left: 10px;
+}

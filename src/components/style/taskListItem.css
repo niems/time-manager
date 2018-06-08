@@ -1,0 +1,23 @@
+.task-list-item-container {
+    box-sizing: border-box;
+    width: 100%;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    padding: 5px;
+    margin: 2px 0px;
+
+    background: gray;
+}
+
+.task-item-name {
+    font-size: 1em;
+    font-variant: small-caps;
+}
+
+.task-item-duration {
+    font-size: 1em;
+}

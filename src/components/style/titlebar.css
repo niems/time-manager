@@ -1,0 +1,37 @@
+.titlebar-container {
+    -webkit-app-region: drag;
+    width: inherit;
+    min-height: 35px;
+    max-height: 35px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    overflow: hidden;
+
+    background: var(--titlebar-bg);
+}
+
+.titlebar-icon {
+    box-sizing: border-box;
+    -webkit-app-region: no-drag;
+    width: 33px;
+    height: 33px;
+
+    margin: 0px 5px;
+
+    filter: invert(1);
+    transition: transform 0.3s;
+}
+
+#titlebar-menu:hover {
+    transform: scale(1.2, 1.2);
+    filter: invert(1) sepia(1) saturate(500) hue-rotate(120deg);    
+}
+
+#titlebar-close:hover {
+    transform: scale(1.2, 1.2);
+    filter: invert(.5) sepia(1) saturate(100);
+}
