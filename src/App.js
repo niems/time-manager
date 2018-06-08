@@ -111,25 +111,34 @@ class App extends Component {
   onTaskSelect(e) {
     try {
       e.preventDefault();
+      let selectedId = e.currentTarget.id;
+
       console.log('\n*ENTERING onTaskSelect()');
-      console.log(`onTaskSelect selection: ${e.currentTarget.id}`);
+      console.log(`onTaskSelect selection: ${selectedId}`);
 
-      let selectedTask = this.allTasks.filter( task => task.name === e.currentTarget.id );
-
-      if( selectedTask ) {
-        console.log('onTaskSelect(): updating task selection');
-        console.log(`onTaskSelect selection: ${JSON.stringify(selectedTask)}`);        
-        
-        this.setState({ 
-          selectedTask: selectedTask[0],
-          displayMenu: false //closes menu once a new task is selected
-         });
-         
+      if ( selectedId !== this.state.selectedTask.name ) { //selected task is not the same as the current task
+        console.log('onTaskSelect(): new task selected - updating state');
+        let selectedTask = this.allTasks.filter( task => task.name === selectedId );
+  
+        if( selectedTask ) { //selected task is found
+          console.log('onTaskSelect(): updating task selection');
+          console.log(`onTaskSelect selection: ${JSON.stringify(selectedTask)}`);        
+          
+          this.setState({ 
+            selectedTask: selectedTask[0],
+            displayMenu: false //closes menu once a new task is selected
+           });
+        }
+  
+        else {
+          console.log(`onTaskSelect(): selected task not found: ${selectedTask}`);
+        }
       }
 
       else {
-        console.log(`onTaskSelect(): selected task not found: ${selectedTask}`);
+        console.log('onTaskSelect(): task previously selected - no action taken');
       }
+
     }
     catch(err) {
       console.log(`***ERR onTaskSelect(): ${err.message}`);

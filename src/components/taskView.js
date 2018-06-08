@@ -26,6 +26,7 @@ class TaskView extends Component {
         this.state = {
             taskState: 'paused', //toggles between play/paused
 
+            taskName: this.props.task.name,
             elapsedHr: this.props.task.totalDuration.hr - this.props.task.completedDuration.hr,
             elapsedMin: this.props.task.totalDuration.min - this.props.task.completedDuration.min,
             elapsedSec: this.props.task.totalDuration.sec - this.props.task.completedDuration.sec,
@@ -37,6 +38,7 @@ class TaskView extends Component {
     }
 
     componentDidMount() {
+        console.log('taskView component mounted - timer created');
         this.timerId = setInterval( () => {
             if ( this.state.taskState === 'play' ) {
                this.updateElapsedTime();
@@ -44,8 +46,25 @@ class TaskView extends Component {
         }, 1000);
     }
 
+    componentDidUpdate() {
+
+        if ( this.state.taskName !== this.props.task.name ) { //new task selected
+            console.log('Task View componentDidUpdate(): updating duration state');
+    
+            this.setState({
+                taskState: 'paused', //new task selected - pauses until user is ready
+                
+                taskName: this.props.task.name,
+                elapsedHr: this.props.task.totalDuration.hr,
+                elapsedMin: this.props.task.totalDuration.min,
+                elapsedSec: this.props.task.totalDuration.sec
+            });
+        }
+    }
+
     componentWillUnmount() {
         clearInterval(this.timerId);
+        console.log('taskView unmounted - timer deleted');
     }
 
     updateElapsedTime() {
@@ -102,6 +121,8 @@ class TaskView extends Component {
         e.preventDefault();
 
         this.setState({
+            taskState: 'paused',
+
             elapsedHr: this.props.task.totalDuration.hr,
             elapsedMin: this.props.task.totalDuration.min,
             elapsedSec: this.props.task.totalDuration.sec
