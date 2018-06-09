@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import TaskMenu from './taskMenu';
+import TaskMenu from './task-menu-components/taskMenu';
 import TaskArcDisplay from './taskArcDisplay';
 import TaskOptions from './taskOptions';
 import './style/taskView.css';
@@ -133,10 +133,14 @@ class TaskView extends Component {
         if ( this.props.task ) {
             return (
                 <div id='taskView'>
-                    {this.props.displayMenu ? <TaskMenu allTasks={this.props.allTasks} onTaskSelect={this.props.onTaskSelect} /> : null}
+                    {
+                        this.props.displayMenu ? 
+                        <TaskMenu allTasks={this.props.allTasks} onTaskSelect={this.props.onTaskSelect} onThemeSelect={this.props.onThemeSelect} />
+                        : null
+                    }
 
                     <h2 id='task-name'>{this.props.task.name}</h2>
-                    <TaskArcDisplay hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} />
+                    <TaskArcDisplay theme={this.props.theme} hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} />
                     <TaskDuration hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} total={this.props.task.totalDuration} />
                     <TaskOptions taskState={this.state.taskState} onToggle={this.onToggleTaskState} onRestart={this.onRestartTask} />
                 </div>

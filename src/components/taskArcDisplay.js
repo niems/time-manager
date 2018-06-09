@@ -8,7 +8,7 @@ output hr/min/sec counting down before changing to ArcSeries
 
 const PI = Math.PI;
 
-const TaskArcDisplay = ({hr, min, sec}) => {
+const TaskArcDisplay = ({ theme, hr, min, sec }) => {
     return (
         <div id='task-arc-display-container'>
             <div id='task-arc-display'>
@@ -19,8 +19,8 @@ const TaskArcDisplay = ({hr, min, sec}) => {
                     height={280}
                     center={{x: 0, y: 0}}   
                     
-                    fill='#25282E' 
-                    stroke='#58D9FA'
+                    fill={theme.arcFill} 
+                    stroke={theme.arcStroke}
                     getAngle={d => d.time}
                     getAngle0={d => 2 * PI}>
                     <ArcSeries

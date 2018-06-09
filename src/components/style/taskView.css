@@ -17,6 +17,7 @@
 
 #task-name {
     font-variant: small-caps;
+    font-size: 1.8em;
 
     background: var(--task-header-bg);
     color: var(--task-header-fg);

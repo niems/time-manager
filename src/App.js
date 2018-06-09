@@ -32,54 +32,18 @@ class App extends Component {
        * total duration: total time required to complete task
        */
       /*
-      this.allTasks = [
-          {
-              name: 'breath',
-              completedDuration: {
-                hr: 0,
-                min: 0,
-                sec: 0
-              },
-              totalDuration: {
-                  hr: 23,
-                  min: 59,
-                  sec: 59
-              }
-          },
-          {
-            name: 'sleep',
-            completedDuration: {
-              hr: 0,
-              min: 0,
-              sec: 0
-            },
-            totalDuration: {
-                hr: 8,
-                min: 0,
-                sec: 0
-            }
-          },
-          {
-            name: 'code',
-            completedDuration: {
-              hr: 0,
-              min: 0,
-              sec: 0
-            },
-            totalDuration: {
-                hr: 10,
-                min: 0,
-                sec: 0
-            }
-          }         
-      ];
-      */
 
       /**
        * selected task: passed as initialization data for task view
        */
       this.state = {
           displayMenu: false,
+          theme: {
+            id: 'dark-theme',
+            path: './themes/dark-theme.css',
+            arcFill: '#25282E',
+            arcStroke: '#58D9FA'
+          },
 
           selectedTask: {
             name: 'ex task 1',
@@ -140,6 +104,7 @@ class App extends Component {
 
       this.onMenu = this.onMenu.bind(this); //toggles task menu
       this.onTaskSelect = this.onTaskSelect.bind(this); //selects the clicked task in the menu
+      this.onColorThemeSelect = this.onColorThemeSelect.bind(this); //selects the clicked color theme in the task menu
 
       this.onClose = this.onClose.bind(this); //closes electron
   }
@@ -180,12 +145,59 @@ class App extends Component {
       }
 
       else {
-        console.log('onTaskSelect(): task previously selected - no action taken');
+        console.log('onTaskSelect(): task previously selected - ONLY closing display menu');
+
+        this.setState({
+          displayMenu: false
+        });
       }
 
     }
     catch(err) {
       console.log(`***ERR onTaskSelect(): ${err.message}`);
+    }
+  }
+
+  onColorThemeSelect(e) {
+    e.preventDefault();
+    let selectedTheme = e.currentTarget.id;
+
+    console.log(`onColorThemeSelect(): theme selected - ${selectedTheme}`);
+
+    if ( selectedTheme !== this.state.theme.id ) { //different theme selected
+      console.log('onColorThemeSelected(): different theme selected - updating state');
+
+      if ( selectedTheme === 'dark-theme' ) {
+        this.setState({
+          displayMenu: false,
+          theme: {
+            id: 'dark-theme',
+            path: './themes/dark-theme.css',
+            arcFill: '#25282E',
+            arcStroke: '#58D9FA'
+          }
+        });
+      }
+
+      else if ( selectedTheme === 'light-theme' ) {
+        this.setState({
+          displayMenu: false,
+          theme: {
+            id: 'light-theme',
+            path: './themes/light-theme.css',
+            arcFill: '#869BBD',
+            arcStroke: '#020607'
+          }
+        });
+      }
+    }
+
+    else {
+      console.log('onColorThemeSelect(): same theme selected - ONLY menu closing');
+
+      this.setState({
+        displayMenu: false
+      });
     }
   }
 
@@ -206,9 +218,11 @@ class App extends Component {
   render() {
     return (
         <div className='wrapper'>
-            <link rel='stylesheet' href='./themes/dark-theme.css' />
+            <link rel='stylesheet' href={this.state.theme.path} />
             <Titlebar onMenu={this.onMenu} onClose={this.onClose} />
-            <TaskView task={this.state.selectedTask} allTasks={this.state.allTasks} displayMenu={this.state.displayMenu} onTaskSelect={this.onTaskSelect} />
+
+            <TaskView task={this.state.selectedTask} allTasks={this.state.allTasks} displayMenu={this.state.displayMenu}
+                      onTaskSelect={this.onTaskSelect} theme={this.state.theme} onThemeSelect={this.onColorThemeSelect} />
         </div>
     );
   }

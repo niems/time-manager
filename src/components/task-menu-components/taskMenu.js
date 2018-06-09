@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ShowAllTasks from './showAllTasks';
+import ColorThemeOptions from './colorThemeOptions';
 import './style/taskMenu.css';
 
 function TaskMenuOptions({ selectedOption, onOptionSelect }) {
@@ -36,10 +37,16 @@ function TaskMenuOptions({ selectedOption, onOptionSelect }) {
     );
 }
 
-function DisplayMenuSelection({ selected, allTasks, onSelect }) {
+function DisplayMenuSelection({ selected, allTasks, onTaskSelect, onThemeSelect }) {
     if ( selected === 'task-list-option' ) {
         return (
-            <ShowAllTasks allTasks={allTasks} onSelect={onSelect} />
+            <ShowAllTasks allTasks={allTasks} onSelect={onTaskSelect} />
+        );
+    }
+
+    else if ( selected === 'color-theme-option' ) {
+        return (
+            <ColorThemeOptions onSelect={onThemeSelect} />
         );
     }
 
@@ -77,7 +84,9 @@ class TaskMenu extends Component {
         return (
             <div id='task-menu-container'>
                 <TaskMenuOptions selectedOption={this.state.selectedOption} onOptionSelect={this.onOptionSelect} />
-                <DisplayMenuSelection selected={this.state.selectedOption} allTasks={this.props.allTasks} onSelect={this.props.onTaskSelect} />
+                
+                <DisplayMenuSelection selected={this.state.selectedOption} allTasks={this.props.allTasks}
+                                      onTaskSelect={this.props.onTaskSelect} onThemeSelect={this.props.onThemeSelect} />
             </div>
         );
     }
