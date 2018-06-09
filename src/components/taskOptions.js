@@ -1,12 +1,12 @@
 import React from 'react';
 import './style/taskOptions.css';
 
-const TaskOptions = ({ taskState, onToggle, onRestart }) => {
+const TaskOptions = ({ taskState, onToggle, onRestart, onAddTask }) => {
 
     if ( taskState === 'play' ) {
         return (
             <div className='task-options-container paused'>
-                <button className='task-quick-add'>
+                <button className='task-quick-add' onClick={onAddTask}>
                     <img className='task-quick-add-img' src='./images/task-options/add.svg' alt='failed to load task quick add img' />
                 </button>
 
@@ -23,7 +23,7 @@ const TaskOptions = ({ taskState, onToggle, onRestart }) => {
 
     return (
         <div className='task-options-container play'>
-            <button className='task-quick-add'>
+            <button className='task-quick-add' onClick={onAddTask}>
                 <img className='task-quick-add-img' src='./images/task-options/add.svg' alt='failed to load task quick add img' />
             </button>
 

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import TaskMenu from './task-menu-components/taskMenu';
+import AddTask from './add-task-components/addTask';
 import TaskArcDisplay from './taskArcDisplay';
 import TaskOptions from './taskOptions';
 import './style/taskView.css';
@@ -96,13 +97,9 @@ class TaskView extends Component {
         }
 
         else {
-            //callback to display 'task complete' 
             console.log('TASK COMPLETE');
 
             this.setState({
-                elapsedSec: 59,
-                elapsedMin: 59,
-                elapsedHr: 23,
                 taskState: 'paused'
             });
         }
@@ -138,11 +135,16 @@ class TaskView extends Component {
                         <TaskMenu allTasks={this.props.allTasks} onTaskSelect={this.props.onTaskSelect} onThemeSelect={this.props.onThemeSelect} />
                         : null
                     }
+                    {
+                        this.props.displayAddTask ?
+                        <AddTask />
+                        : null
+                    }
 
                     <h2 id='task-name'>{this.props.task.name}</h2>
                     <TaskArcDisplay theme={this.props.theme} hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} />
                     <TaskDuration hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} total={this.props.task.totalDuration} />
-                    <TaskOptions taskState={this.state.taskState} onToggle={this.onToggleTaskState} onRestart={this.onRestartTask} />
+                    <TaskOptions taskState={this.state.taskState} onToggle={this.onToggleTaskState} onRestart={this.onRestartTask} onAddTask={this.props.onAddTask} />
                 </div>
             );
         }

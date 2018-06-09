@@ -1,0 +1,33 @@
+@keyframes add-task-enter {
+    from {
+        left: 100%;
+    }
+
+    to {
+        left: 2.5%;
+    }
+}
+
+#add-task-container {
+    position: absolute;
+    box-sizing: border-box;
+    width: 95%;
+    height: 55%;
+    
+    z-index: 6;
+    overflow: hidden;
+    opacity: 0.9;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+
+    background: var(--task-menu-bg);
+    box-shadow: 2px 2px 5px black;   
+    
+    animation-name: add-task-enter;
+    animation-duration: 0.5s;
+}

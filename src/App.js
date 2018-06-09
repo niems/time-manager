@@ -37,7 +37,8 @@ class App extends Component {
        * selected task: passed as initialization data for task view
        */
       this.state = {
-          displayMenu: false,
+          displayMenu: false, //displays the task menu component
+          displayAddTask: false, //displays the task add component
           theme: {
             id: 'dark-theme',
             path: './themes/dark-theme.css',
@@ -46,22 +47,35 @@ class App extends Component {
           },
 
           selectedTask: {
-            name: 'ex task 1',
+            name: 'code',
             completedDuration: {
               hr: 0,
               min: 0,
               sec: 0
             },
             totalDuration: {
-                hr: 1,
-                min: 5,
-                sec: 59
+                hr: 10,
+                min: 0,
+                sec: 0
             }
         },
 
         allTasks: [
           {
-              name: 'breath',
+            name: 'testing  :D',
+            completedDuration: {
+              hr: 0,
+              min: 0,
+              sec: 0,
+            },
+            totalDuration: {
+              hr: 0,
+              min: 1,
+              sec: 59
+            }
+          },
+          {
+              name: 'breathe',
               completedDuration: {
                 hr: 0,
                 min: 0,
@@ -98,11 +112,26 @@ class App extends Component {
                 min: 0,
                 sec: 0
             }
+          },
+          {
+            name: 'read',
+            completedDuration: {
+              hr: 0,
+              min: 0,
+              sec: 0
+            },
+            totalDuration: {
+                hr: 1,
+                min: 30,
+                sec: 0
+            }
           }         
         ]
       };
 
-      this.onMenu = this.onMenu.bind(this); //toggles task menu
+      this.onMenu = this.onMenu.bind(this); //toggles the task menu
+      this.onAddTask = this.onAddTask.bind(this); //toggles the add task modal window
+
       this.onTaskSelect = this.onTaskSelect.bind(this); //selects the clicked task in the menu
       this.onColorThemeSelect = this.onColorThemeSelect.bind(this); //selects the clicked color theme in the task menu
 
@@ -114,6 +143,14 @@ class App extends Component {
 
     this.setState({
       displayMenu: !this.state.displayMenu
+    });
+  }
+
+  onAddTask(e) {
+    e.preventDefault();
+
+    this.setState({
+      displayAddTask: !this.state.displayAddTask
     });
   }
 
@@ -222,7 +259,8 @@ class App extends Component {
             <Titlebar onMenu={this.onMenu} onClose={this.onClose} />
 
             <TaskView task={this.state.selectedTask} allTasks={this.state.allTasks} displayMenu={this.state.displayMenu}
-                      onTaskSelect={this.onTaskSelect} theme={this.state.theme} onThemeSelect={this.onColorThemeSelect} />
+                      onTaskSelect={this.onTaskSelect} theme={this.state.theme} onThemeSelect={this.onColorThemeSelect} 
+                      displayAddTask={this.state.displayAddTask} onAddTask={this.onAddTask} />
         </div>
     );
   }
