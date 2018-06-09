@@ -54,14 +54,16 @@
     height: max-content;
     margin: 25px 0px;
 
-}
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
 
-.task-option-img-container.selected {
-    border-radius: 5px;
-    border-style: none none solid none;
-    border-width: 2px;
-    border-color: var(--accent);
+    opacity: 0.75;
 }
+    .task-option-img-container.selected {
+        opacity: 1;
+    }
 
 .task-menu-option-img {
     box-sizing: border-box;
@@ -69,10 +71,8 @@
     height: 30px;
 
     filter: invert(1);
-
-    transition: all 0.5s;
+    transition: transform 0.4s;
 }
-
-.task-menu-option-img:hover {
-    transform: scale(1.15, 1.15);
-}
+    .task-menu-option-img.selected {
+        filter: invert(1) sepia(1) saturate(500) hue-rotate(120deg);    
+    }

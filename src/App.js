@@ -31,6 +31,7 @@ class App extends Component {
        * 
        * total duration: total time required to complete task
        */
+      /*
       this.allTasks = [
           {
               name: 'breath',
@@ -72,6 +73,7 @@ class App extends Component {
             }
           }         
       ];
+      */
 
       /**
        * selected task: passed as initialization data for task view
@@ -91,7 +93,49 @@ class App extends Component {
                 min: 5,
                 sec: 59
             }
-        }
+        },
+
+        allTasks: [
+          {
+              name: 'breath',
+              completedDuration: {
+                hr: 0,
+                min: 0,
+                sec: 0
+              },
+              totalDuration: {
+                  hr: 23,
+                  min: 59,
+                  sec: 59
+              }
+          },
+          {
+            name: 'sleep',
+            completedDuration: {
+              hr: 0,
+              min: 0,
+              sec: 0
+            },
+            totalDuration: {
+                hr: 8,
+                min: 0,
+                sec: 0
+            }
+          },
+          {
+            name: 'code',
+            completedDuration: {
+              hr: 0,
+              min: 0,
+              sec: 0
+            },
+            totalDuration: {
+                hr: 10,
+                min: 0,
+                sec: 0
+            }
+          }         
+        ]
       };
 
       this.onMenu = this.onMenu.bind(this); //toggles task menu
@@ -118,7 +162,7 @@ class App extends Component {
 
       if ( selectedId !== this.state.selectedTask.name ) { //selected task is not the same as the current task
         console.log('onTaskSelect(): new task selected - updating state');
-        let selectedTask = this.allTasks.filter( task => task.name === selectedId );
+        let selectedTask = this.state.allTasks.filter( task => task.name === selectedId );
   
         if( selectedTask ) { //selected task is found
           console.log('onTaskSelect(): updating task selection');
@@ -164,7 +208,7 @@ class App extends Component {
         <div className='wrapper'>
             <link rel='stylesheet' href='./themes/dark-theme.css' />
             <Titlebar onMenu={this.onMenu} onClose={this.onClose} />
-            <TaskView task={this.state.selectedTask} allTasks={this.allTasks} displayMenu={this.state.displayMenu} onTaskSelect={this.onTaskSelect} />
+            <TaskView task={this.state.selectedTask} allTasks={this.state.allTasks} displayMenu={this.state.displayMenu} onTaskSelect={this.onTaskSelect} />
         </div>
     );
   }

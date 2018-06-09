@@ -4,17 +4,33 @@ import './style/taskMenu.css';
 
 function TaskMenuOptions({ selectedOption, onOptionSelect }) {
     //if selected, add .selected class for underlining
-    let taskListClasses = (selectedOption === 'task-list-option') ? 'task-option-img-container selected' : 'task-option-img-container';
-    let colorThemeClasses = (selectedOption === 'color-theme-option') ? 'task-option-img-container selected' : 'task-option-img-container';
+    let taskListClasses = 'task-option-img-container';
+    let taskListImgClasses = 'task-menu-option-img';
+
+    let colorThemeClasses = 'task-option-img-container';
+    let colorThemeImgClasses = 'task-menu-option-img';
+
+    if ( selectedOption === 'task-list-option' ) {
+        taskListClasses += ' selected';
+        taskListImgClasses += ' selected';
+    } 
+
+    else if ( selectedOption === 'color-theme-option' ) {
+        colorThemeClasses += ' selected';
+        colorThemeImgClasses += ' selected';
+    }
+
+    //let taskListClasses = (selectedOption === 'task-list-option') ? 'task-option-img-container selected' : 'task-option-img-container';
+    //let colorThemeClasses = (selectedOption === 'color-theme-option') ? 'task-option-img-container selected' : 'task-option-img-container';
 
     return (
         <div id='task-menu-options-container'>
             <span id='task-list-option' className={taskListClasses} onClick={onOptionSelect}>
-                <img className='task-menu-option-img' src='./images/task-menu-options/task-list.svg' alt='failed to load task list img' />
+                <img className={taskListImgClasses} src='./images/task-menu-options/task-list.svg' alt='failed to load task list img' />
             </span>
 
             <span id='color-theme-option' className={colorThemeClasses} onClick={onOptionSelect}>
-                <img className='task-menu-option-img' src='./images/task-menu-options/color-theme.svg' alt='failed to load color theme img' />
+                <img className={colorThemeImgClasses} src='./images/task-menu-options/color-theme.svg' alt='failed to load color theme img' />
             </span>
         </div>
     );
@@ -43,10 +59,18 @@ class TaskMenu extends Component {
 
     onOptionSelect(e) {
         e.preventDefault();
+        let userOption = e.currentTarget.id;
 
-        this.setState({
-            selectedOption: (this.state.selectedOption === 'task-list-option') ? 'color-theme-option' : 'task-list-option'
-        });
+        if ( userOption !== this.state.selectedOption ) {
+            console.log('onOptionSelect() new option selected - updating state');
+            this.setState({
+                selectedOption: userOption
+            });
+        }
+
+        else {
+            console.log('onOptionSelect() same option selected - no action taken');
+        }
     }
 
     render() {
@@ -59,14 +83,4 @@ class TaskMenu extends Component {
     }
 }
 
-/*
-const TaskMenu = ({ allTasks, onTaskSelect }) => {
-    return (
-        <div id='task-menu-container'>
-            <TaskMenuOptions />
-            <ShowAllTasks allTasks={allTasks} onSelect={onTaskSelect} />
-        </div>
-    );
-}
-*/
 export default TaskMenu;
