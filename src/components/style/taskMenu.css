@@ -30,7 +30,8 @@
 
 #task-menu-options-container {
     box-sizing: border-box;
-    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
     height: inherit;
     padding-top: 15px;
 
