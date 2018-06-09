@@ -16,10 +16,7 @@
     margin: 0px 10px;
 
     border-radius: 15px;
-    border-style: none solid none solid;
-    border-width: 2px;
-    border-color: black;
 
     background: var(--task-menu-list-bg);
-    box-shadow: 0px 2px 5px black;
+    box-shadow: 2px 2px 5px black;
 }

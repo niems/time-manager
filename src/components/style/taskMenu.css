@@ -20,9 +20,9 @@
 
     z-index: 5;
     overflow: hidden;
+    opacity: 0.9;
 
     background: var(--task-menu-bg);
-    opacity: 0.95;
 
     animation-name: task-menu-enter;
     animation-duration: 0.65s;
@@ -32,19 +32,46 @@
     box-sizing: border-box;
     width: 50px;
     height: inherit;
-    padding-top: 20px;
+    padding-top: 15px;
 
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: center;
 
-    background: red;
+    border-style: none solid none none;
+    border-width: 1px;
+
+    border-color: var(--task-menubar-border);
+    background: var(--task-menubar-bg);
+    box-shadow: 1px 0px 3px black;
+}
+
+.task-option-img-container {
+    box-sizing: border-box;
+    width: max-content;
+    height: max-content;
+    margin: 25px 0px;
+
+}
+
+.task-option-img-container.selected {
+    border-radius: 5px;
+    border-style: none none solid none;
+    border-width: 2px;
+    border-color: var(--accent);
 }
 
 .task-menu-option-img {
+    box-sizing: border-box;
     width: 30px;
     height: 30px;
 
     filter: invert(1);
+
+    transition: all 0.5s;
+}
+
+.task-menu-option-img:hover {
+    transform: scale(1.15, 1.15);
 }

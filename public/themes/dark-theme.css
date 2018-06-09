@@ -11,6 +11,9 @@
     --titlebar-bg: var(--sixth);
 
     --task-menu-bg: var(--main);
+    --task-menubar-bg: inherit;
+    --task-menubar-border: var(--sixth);
+
     --task-menu-list-bg: inherit;
     --task-menu-list-border: var(--sixth);
     --task-menu-item-bg: var(--main);
