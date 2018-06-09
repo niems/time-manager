@@ -15,16 +15,17 @@
     justify-content: space-evenly;
     align-items: center;
     
-    
     background: var(--task-menu-item-bg);
     border-color: var(--task-menu-item-border);
     color: var(--ten);
     box-shadow: -2px 2px 4px black;
 
+    opacity: 0.5;
     transition: all 0.3s;
 }
 
 .task-list-item-container:hover {
+    opacity: 1;
     color: var(--accent);
     transform: scale(1.1, 1.1);
 }

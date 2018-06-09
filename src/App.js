@@ -164,7 +164,7 @@ class App extends Component {
         <div className='wrapper'>
             <link rel='stylesheet' href='./themes/dark-theme.css' />
             <Titlebar onMenu={this.onMenu} onClose={this.onClose} />
-            <TaskView task={this.state.selectedTask} allTasks={this.allTasks} displayMenu={this.state.displayMenu} onSelect={this.onTaskSelect} />
+            <TaskView task={this.state.selectedTask} allTasks={this.allTasks} displayMenu={this.state.displayMenu} onTaskSelect={this.onTaskSelect} />
         </div>
     );
   }

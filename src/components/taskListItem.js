@@ -6,11 +6,7 @@ function formatNum(num) {
 }
 
 function formatDuration(duration) {
-    duration.hr = formatNum( duration.hr );
-    duration.min = formatNum( duration.min );
-    duration.sec = formatNum ( duration.sec );
-
-    return ( duration.hr + ':' + duration.min + ':' + duration.sec );
+    return ( formatNum( duration.hr ) + ':' + formatNum( duration.min ) + ':' + formatNum( duration.sec ) );
 }
 
 const TaskListItem = ({ task, onSelect }) => {

@@ -1,18 +1,20 @@
 import React from 'react';
-import TaskListItem from './taskListItem';
+import ShowAllTasks from './showAllTasks';
 import './style/taskMenu.css';
 
-const TaskMenu = ({ allTasks, onSelect }) => {
+function TaskMenuOptions(props) {
+    return (
+        <div id='task-menu-options-container'>
+            <img className='task-menu-option-img' src='./images/task-menu-options/task-list.svg' alt='failed to load task list img' />
+        </div>
+    );
+}
 
-     const displayList = allTasks.map( task => (
-         <TaskListItem key={task.name} task={task} onSelect={onSelect} />
-     ));
-
+const TaskMenu = ({ allTasks, onTaskSelect }) => {
     return (
         <div id='task-menu-container'>
-            <ul id='task-menu-list'>
-                {displayList}
-            </ul>
+            <TaskMenuOptions />
+            <ShowAllTasks allTasks={allTasks} onSelect={onTaskSelect} />
         </div>
     );
 }
