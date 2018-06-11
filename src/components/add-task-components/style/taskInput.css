@@ -16,6 +16,12 @@
     right: 0%;
 
     filter: invert(1);
+    transition: transform 0.3s;
+}
+
+#task-input-close-img:hover {
+    transform: scale(1.2, 1.2);
+    filter: invert(.5) sepia(1) saturate(100);
 }
 
 /*TASK NAME INPUT SETUP*/
