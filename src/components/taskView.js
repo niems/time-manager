@@ -137,14 +137,14 @@ class TaskView extends Component {
                     }
                     {
                         this.props.displayAddTask ?
-                        <AddTask />
+                        <AddTask onClose={this.props.onToggleAddTask} createTask={this.props.createNewTask} />
                         : null
                     }
 
                     <h2 id='task-name'>{this.props.task.name}</h2>
                     <TaskArcDisplay theme={this.props.theme} hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} />
                     <TaskDuration hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} total={this.props.task.totalDuration} />
-                    <TaskOptions taskState={this.state.taskState} onToggle={this.onToggleTaskState} onRestart={this.onRestartTask} onAddTask={this.props.onAddTask} />
+                    <TaskOptions taskState={this.state.taskState} onToggle={this.onToggleTaskState} onRestart={this.onRestartTask} onToggleAddTask={this.props.onToggleAddTask} />
                 </div>
             );
         }

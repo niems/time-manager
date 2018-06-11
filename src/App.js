@@ -38,7 +38,7 @@ class App extends Component {
        */
       this.state = {
           displayMenu: false, //displays the task menu component
-          displayAddTask: false, //displays the task add component
+          displayAddTask: true, //displays the task add component
           theme: {
             id: 'dark-theme',
             path: './themes/dark-theme.css',
@@ -130,7 +130,8 @@ class App extends Component {
       };
 
       this.onMenu = this.onMenu.bind(this); //toggles the task menu
-      this.onAddTask = this.onAddTask.bind(this); //toggles the add task modal window
+      this.onToggleAddTask = this.onToggleAddTask.bind(this); //toggles the add task modal window
+      this.createNewTask = this.createNewTask.bind(this); //creates new task based on add task window
 
       this.onTaskSelect = this.onTaskSelect.bind(this); //selects the clicked task in the menu
       this.onColorThemeSelect = this.onColorThemeSelect.bind(this); //selects the clicked color theme in the task menu
@@ -146,12 +147,50 @@ class App extends Component {
     });
   }
 
-  onAddTask(e) {
-    e.preventDefault();
+  onToggleAddTask(e = undefined) {
+    if ( e ) {
+      e.preventDefault();
+    }
+
+    console.log('onToggleAddTask() updating toggle state');
 
     this.setState({
       displayAddTask: !this.state.displayAddTask
     });
+  }
+
+  createNewTask(task) {
+    console.log(`createNewTask(): ${JSON.stringify(task)}`);
+
+    let doesTaskExist = this.state.allTasks.filter( t => t.name.toLocaleLowerCase() === task.name.toLocaleLowerCase() ); //filters all out except for the same task name if it exists
+
+    if ( !doesTaskExist.length  ) { 
+      console.log('createNewTask(): adding new task to all tasks :D');
+      let allTasks = this.state.allTasks;
+  
+      //check for unique name before adding
+      //
+  
+      allTasks.unshift({
+        name: task.name,
+        completedDuration: {
+          hr: 0,
+          min: 0,
+          sec: 0
+        },
+        totalDuration: {
+          hr: task.hr,
+          min: task.min,
+          sec: task.sec
+        }
+      });
+  
+      this.setState({ allTasks });
+    }
+
+    else {
+      console.log('createNewTask(): task already exists - no action taken');
+    }
   }
 
   onTaskSelect(e) {
@@ -260,7 +299,7 @@ class App extends Component {
 
             <TaskView task={this.state.selectedTask} allTasks={this.state.allTasks} displayMenu={this.state.displayMenu}
                       onTaskSelect={this.onTaskSelect} theme={this.state.theme} onThemeSelect={this.onColorThemeSelect} 
-                      displayAddTask={this.state.displayAddTask} onAddTask={this.onAddTask} />
+                      displayAddTask={this.state.displayAddTask} onToggleAddTask={this.onToggleAddTask} createNewTask={this.createNewTask} />
         </div>
     );
   }
