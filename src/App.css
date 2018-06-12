@@ -64,14 +64,15 @@
 
     font-variant: small-caps;
 
-    color: var(--accent);
-    background: var(--task-menu-bg);
+    color: var(--add-task-success-text);
+    background: var(--add-task-success-bg);
     box-shadow: 2px 2px 5px black;       
 
     animation-name: add-task-fade;
     animation-duration: 1.5s;
 }
 
+/**failed to add task setup */
 #add-task-fail-container {
     position: absolute;
     top: 40%;
@@ -85,15 +86,29 @@
 
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
-    font-variant: small-caps;
-
-    color: red;
-    background: var(--task-menu-bg);
+    color: var(--add-task-fail-text);
+    background: var(--add-task-fail-bg);
     box-shadow: 2px 2px 5px black;       
 
     animation-name: add-task-failed-exit;
     animation-duration: 2s;
 }
+
+#add-task-fail-title {
+    font-size: 1em;
+}
+    #add-task-error-title {
+        font-variant: small-caps;
+        font-size: 1.3em;
+        color: var(--add-task-fail-header-text);
+    }
+
+#add-task-fail-msg {
+    font-size: 0.9em;
+    color: var(--add-task-fail-text);
+}
+
+/**END failed to add task setup */

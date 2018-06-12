@@ -31,8 +31,8 @@ function DisplayAddTaskSuccess(props) {
 function DisplayAddTaskFail(props) {
   return (
     <div id='add-task-fail-container'>
-      <h3 id='add-task-fail-title'>Error</h3>
-      <p id='add-task-fail-msg'>Task not added: already exists :o</p>
+      <h3 id='add-task-fail-title'><span id='add-task-error-title'>Error</span>: task exists</h3>
+      <span id='add-task-fail-msg'>The task already exists - no action taken </span>
     </div>
   );
 }

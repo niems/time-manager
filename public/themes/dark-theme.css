@@ -33,4 +33,11 @@
     --task-options-border: var(--seventh);
     --task-options-button-bg: inherit;
     --task-options-button-hover-bg: var(--sixth);
+
+    --add-task-success-text: var(--accent);
+    --add-task-success-bg: var(--main);
+
+    --add-task-fail-text: var(--ten);
+    --add-task-fail-header-text: red;
+    --add-task-fail-bg: var(--main);
 }
