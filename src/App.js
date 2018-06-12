@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TaskMenu from './components/task-menu-components/taskMenu';
+import AddTask from './components/add-task-components/addTask';
 import Titlebar from './components/titlebar';
 import TaskView from './components/taskView';
 import './App.css';
@@ -20,6 +21,27 @@ function isElectron() {
   }
   
 const isElectronRunning = isElectron();
+
+function DisplayMenu({ displayMenu, allTasks, onTaskSelect, onThemeSelect, removeTask }) {
+  if ( displayMenu ) { //if the menu should be displayed
+    return (
+      <TaskMenu allTasks={allTasks} onTaskSelect={onTaskSelect}
+                onThemeSelect={onThemeSelect} removeTask={removeTask} />
+    );
+  }
+
+  return null;
+}
+
+function DisplayAddTask({ displayAddTask, onClose, createTask }) {
+  if ( displayAddTask ) { //if the add task window should be displayed
+    return (
+      <AddTask onClose={onClose} createTask={createTask} />
+    );
+  }
+
+  return null;
+}
 
 function DisplayAddTaskSuccess(props) {
   return (
@@ -362,12 +384,10 @@ class App extends Component {
             <link rel='stylesheet' href={this.state.theme.path} />
             <Titlebar onMenu={this.onMenu} onClose={this.onClose} />
 
-            {
-              this.state.displayMenu ? 
-              <TaskMenu allTasks={this.state.allTasks} onTaskSelect={this.onTaskSelect}
-                        onThemeSelect={this.onColorThemeSelect} removeTask={this.removeTask} />
-              : null
-            }
+            <DisplayMenu displayMenu={this.state.displayMenu} allTasks={this.state.allTasks} onTaskSelect={this.onTaskSelect}
+                         onThemeSelect={this.onColorThemeSelect} removeTask={this.removeTask} />
+            
+            <DisplayAddTask displayAddTask={this.state.displayAddTask} onClose={this.onToggleAddTask} createTask={this.createNewTask} />
 
             {this.state.displayAddTaskSuccess ? <DisplayAddTaskSuccess /> : null}
             {this.state.displayAddTaskFail ? <DisplayAddTaskFail /> : null}
@@ -382,6 +402,3 @@ class App extends Component {
 }
 
 export default App;
-/*
-
-*/

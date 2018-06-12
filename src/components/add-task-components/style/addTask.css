@@ -9,11 +9,13 @@
 }
 
 #add-task-container {
-    position: absolute;
     box-sizing: border-box;
     width: 80%;
     height: 30%;
     
+    position: absolute;
+    top: 35%;
+
     z-index: 4;
     overflow: hidden;
     opacity: 0.9;

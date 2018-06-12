@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import TaskMenu from './task-menu-components/taskMenu';
-import AddTask from './add-task-components/addTask';
 import NoSelection from './noSelection';
 import TaskArcDisplay from './taskArcDisplay';
 import TaskOptions from './taskOptions';
@@ -203,12 +201,6 @@ class TaskView extends Component {
         if ( this.props.task ) { //if a task is selected
             return (
                 <div id='taskView'>
-                    {
-                        this.props.displayAddTask ?
-                        <AddTask onClose={this.props.onToggleAddTask} createTask={this.props.createNewTask} />
-                        : null
-                    }
-
                     <DisplayTitle name={this.props.task.name} total={this.props.task.totalDuration} />
                     <TaskArcDisplay theme={this.props.theme} hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} />
                     <TaskDuration hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} total={this.props.task.totalDuration} />
@@ -220,12 +212,6 @@ class TaskView extends Component {
         //no task selected
         return (
             <div id='taskView'>
-                {
-                    this.props.displayAddTask ?
-                    <AddTask onClose={this.props.onToggleAddTask} createTask={this.props.createNewTask} />
-                    : null
-                }
-
                 <DisplayTitle />
                 <NoSelection />
                 <TaskOptions onToggleAddTask={this.props.onToggleAddTask} />
