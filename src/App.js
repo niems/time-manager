@@ -96,45 +96,6 @@ class App extends Component {
 
         allTasks: [
           {
-            name: 'testing  :D',
-            completedDuration: {
-              hr: 0,
-              min: 0,
-              sec: 0,
-            },
-            totalDuration: {
-              hr: 0,
-              min: 1,
-              sec: 59
-            }
-          },
-          {
-              name: 'breathe',
-              completedDuration: {
-                hr: 0,
-                min: 0,
-                sec: 0
-              },
-              totalDuration: {
-                  hr: 23,
-                  min: 59,
-                  sec: 59
-              }
-          },
-          {
-            name: 'sleep',
-            completedDuration: {
-              hr: 0,
-              min: 0,
-              sec: 0
-            },
-            totalDuration: {
-                hr: 8,
-                min: 0,
-                sec: 0
-            }
-          },
-          {
             name: 'code',
             completedDuration: {
               hr: 0,
