@@ -41,18 +41,8 @@ class App extends Component {
   constructor(props) {
       super(props);
 
-      /**
-       * stores all added tasks
-       * completed duration: time task has been worked on - updated only when task is paused or a new task is selected. Not in 
-       *                     state because the elapsed time is kept track of in the task view (mainly used as initialization data)
-       * 
-       * total duration: total time required to complete task
-       */
-      /*
+      this.recentlyRemovedId = undefined; //keeps the removed task (less than a second ago) from also being selected
 
-      /**
-       * selected task: passed as initialization data for task view
-       */
       this.state = {
           displayMenu: false, //displays the task menu component
 
@@ -239,11 +229,15 @@ class App extends Component {
   removeTask(e) {
     e.preventDefault();
     console.log('removeTask()');
-    let id = e.currentTarget.id.replace('-delete', ''); //gets the id of the selected task to remove
-    let allTasks = this.state.allTasks.filter(task => task.name !== id); //removes the selected task from all tasks
+    this.recentlyRemovedId = e.currentTarget.id.replace('-delete', ''); //gets the id of the selected task to remove
+    let allTasks = this.state.allTasks.filter(task => task.name !== this.recentlyRemovedId); //removes the selected task from all tasks
 
     this.setState({ allTasks });
     //need to check if the task being removed is selected - clear from selected if it is
+
+    setTimeout( () => {
+      this.recentlyRemovedId = undefined; //reset
+    }, 1000);
   }
 
   onTaskSelect(e) {
@@ -252,36 +246,37 @@ class App extends Component {
       console.log('onTaskSelect()');
       let selectedId = e.currentTarget.id;
 
-      console.log('\n*ENTERING onTaskSelect()');
-      console.log(`onTaskSelect selection: ${selectedId}`);
-
-      if ( selectedId !== this.state.selectedTask.name ) { //selected task is not the same as the current task
-        console.log('onTaskSelect(): new task selected - updating state');
-        let selectedTask = this.state.allTasks.filter( task => task.name === selectedId );
+      if ( selectedId !== this.recentlyRemovedId ) { //only allows the task to be selected if it wasn't just removed 
+        console.log('\n*ENTERING onTaskSelect()');
+        console.log(`onTaskSelect selection: ${selectedId}`);
   
-        if( selectedTask ) { //selected task is found
-          console.log('onTaskSelect(): updating task selection');
-          console.log(`onTaskSelect selection: ${JSON.stringify(selectedTask)}`);        
-          
-          this.setState({ 
-            selectedTask: selectedTask[0],
-            displayMenu: false //closes menu once a new task is selected
-           });
+        if ( selectedId !== this.state.selectedTask.name ) { //selected task is not the same as the current task
+          console.log('onTaskSelect(): new task selected - updating state');
+          let selectedTask = this.state.allTasks.filter( task => task.name === selectedId );
+    
+          if( selectedTask ) { //selected task is found
+            console.log('onTaskSelect(): updating task selection');
+            console.log(`onTaskSelect selection: ${JSON.stringify(selectedTask)}`);        
+            
+            this.setState({ 
+              selectedTask: selectedTask[0],
+              displayMenu: false //closes menu once a new task is selected
+             });
+          }
+    
+          else {
+            console.log(`onTaskSelect(): selected task not found: ${selectedTask}`);
+          }
         }
   
         else {
-          console.log(`onTaskSelect(): selected task not found: ${selectedTask}`);
+          console.log('onTaskSelect(): task previously selected - ONLY closing display menu');
+  
+          this.setState({
+            displayMenu: false
+          });
         }
       }
-
-      else {
-        console.log('onTaskSelect(): task previously selected - ONLY closing display menu');
-
-        this.setState({
-          displayMenu: false
-        });
-      }
-
     }
     catch(err) {
       console.log(`***ERR onTaskSelect(): ${err.message}`);

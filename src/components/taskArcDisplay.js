@@ -25,7 +25,7 @@ const TaskArcDisplay = ({ theme, hr, min, sec }) => {
                     getAngle0={d => 2 * PI}>
                     <ArcSeries
                         animation={{
-                            damping: 8,
+                            damping: 9,
                             stiffness: 300
                         }}
                         radiusDomain={[0, 3]}
