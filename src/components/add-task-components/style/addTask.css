@@ -25,7 +25,7 @@
 
     border-radius: 10px;
 
-    background: var(--task-menu-bg);
+    background: var(--add-task-bg);
     box-shadow: 2px 2px 5px black;   
     
     animation-name: add-task-enter;

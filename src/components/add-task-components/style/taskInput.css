@@ -38,7 +38,7 @@
     padding: 3px 5px;
     border-style: none none solid none;
     border-width: 1px;
-    border-color: var(--ten);
+    border-color: var(--add-task-inputfield-border);
 
     font-size: 1em;
     font-variant: small-caps;
@@ -46,6 +46,7 @@
     outline: none;
 
     background: inherit;
+    color: var(--add-task-fg);    
 }
 /*END TASK NAME INPUT SETUP*/
 
@@ -80,7 +81,7 @@
     padding: 3px 0px;
     border-style: none none solid none;
     border-width: 1px;
-    border-color: var(--ten);
+    border-color: var(--add-task-inputfield-border);
 
     font-size: 1em;
 
@@ -89,13 +90,14 @@
     outline: none;
 
     background: inherit;
+    color: var(--add-task-fg);
 }
 
 .task-duration-separator {
     font-weight: bold;
     font-size: 1.2em;
 
-    color: var(--ten);
+    color: var(--add-task-duration-separator);
 }
 
 

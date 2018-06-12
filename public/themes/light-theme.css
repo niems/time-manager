@@ -34,6 +34,11 @@
     --task-options-button-bg: inherit;
     --task-options-button-hover-bg: var(--sixth);
 
+    --add-task-bg: var(--main);
+    --add-task-fg: var(--text-fg);
+    --add-task-inputfield-border: var(--accent);
+    --add-task-duration-separator: var(--accent);
+
     --add-task-success-text: var(--accent);
     --add-task-success-bg: var(--main);
 
