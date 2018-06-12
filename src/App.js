@@ -80,19 +80,7 @@ class App extends Component {
             arcStroke: '#58D9FA'
           },
 
-          selectedTask: {
-            name: 'code',
-            completedDuration: {
-              hr: 0,
-              min: 0,
-              sec: 0
-            },
-            totalDuration: {
-                hr: 10,
-                min: 0,
-                sec: 0
-            }
-        },
+          selectedTask: undefined,
 
         allTasks: [
           {
@@ -358,7 +346,6 @@ class App extends Component {
                          onThemeSelect={this.onColorThemeSelect} removeTask={this.removeTask} />
             
             <DisplayAddTask displayAddTask={this.state.displayAddTask} onClose={this.onToggleAddTask} createTask={this.createNewTask} />
-
             {this.state.displayAddTaskSuccess ? <DisplayAddTaskSuccess /> : null}
             {this.state.displayAddTaskFail ? <DisplayAddTaskFail /> : null}
 

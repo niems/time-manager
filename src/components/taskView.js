@@ -74,6 +74,10 @@ class TaskView extends Component {
         }
     }
 
+    componentWillUpdate() {
+        
+    }
+
     componentDidUpdate() {
         console.log(`componentDidUpdate()`);
         displayTestData(this.props.task, this.state.taskName, this.state.elapsedHr, this.state.elapsedMin, this.state.elapsedSec);
@@ -198,7 +202,9 @@ class TaskView extends Component {
     }
 
     render() {
-        if ( this.props.task ) { //if a task is selected
+        //task is selected - need to check both props and current taskName state since if a task is removed in app.js it will take a
+        //moment to update the taskView state
+        if ( this.props.task && this.state.taskName ) { 
             return (
                 <div id='taskView'>
                     <DisplayTitle name={this.props.task.name} total={this.props.task.totalDuration} />
