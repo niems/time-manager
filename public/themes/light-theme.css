@@ -1,7 +1,8 @@
 :root {
     --main: rgb(176, 191, 218);
     --ten: rgb(37, 37, 37);
-    --accent: #020607;
+    --accent: #BB86FC;
+    --accent-two: #020607;    
     --sixth: rgb(183, 197, 224);
     --seventh:rgb(171, 184, 204);
 
@@ -19,8 +20,9 @@
     --task-menu-list-bg: inherit;
     --task-menu-list-border: var(--sixth);
     --task-menu-item-bg: var(--main);
-    --task-menu-item-fg: var(--accent);   
+    --task-menu-item-fg: var(--accent-two);   
     --task-menu-item-border: var(--sixth);
+    --task-menu-item-hover-fg: var(--accent-two);
     
     --task-view-bg: var(--main);
 
@@ -33,13 +35,13 @@
 
     --task-options-bg: var(--main);
     --task-options-border: var(--seventh);
-    --task-options-button-bg: inherit;
+    --task-options-button-bg: var(--main);
     --task-options-button-hover-bg: var(--sixth);
 
     --add-task-bg: var(--main);
     --add-task-fg: var(--text-fg);
-    --add-task-inputfield-border: var(--accent);
-    --add-task-duration-separator: var(--accent);
+    --add-task-inputfield-border: var(--accent-two);
+    --add-task-duration-separator: var(--accent-two);
 
     --add-task-success-text: var(--text-fg);
     --add-task-success-bg: var(--main);
@@ -47,4 +49,8 @@
     --add-task-fail-text: var(--text-fg);
     --add-task-fail-header-text: red;
     --add-task-fail-bg: var(--main);
+
+    --no-selection-bg: var(--main);
+    --no-selection-add-button-bg: var(--accent);
+    --no-selection-add-button-border: var(--accent);
 }

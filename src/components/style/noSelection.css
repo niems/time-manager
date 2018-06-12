@@ -1,0 +1,12 @@
+#no-selection-container {
+    box-sizing: border-box;
+    width: max-content;
+    
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    flex: 1 auto;
+
+    background: var(--no-selection-bg);
+}

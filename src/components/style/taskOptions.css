@@ -1,7 +1,8 @@
 .task-options-container {
     box-sizing: border-box;
     width: inherit;
-    height: max-content;
+    min-height: 45px;
+    max-height: 45px;
 
     display: flex;
     flex-flow: column nowrap;
@@ -35,8 +36,7 @@
     right: 0%;
     top: -18px;
 
-    background-color: var(--task-options-button-bg);
-    background-color: inherit;
+    background: var(--task-options-button-bg);
     box-shadow: 0px 1px 3px black;
     
     transition: all 0.4s;
@@ -47,12 +47,24 @@
     transform: scale(1.1, 1.1);    
 }
 
+    .task-quick-add.no-selection {
+        background: var(--no-selection-add-button-bg);
+        border-color: var(--no-selection-add-button-border);
+    }
+    .task-quick-add.no-selection:hover {
+        transform: scale(1.1, 1.1);
+    }
+
+
 .task-quick-add-img {
     width: 22px;
     height: 25px;
 
     filter: invert(1);
 }
+    .task-quick-add-img.no-selection {
+        filter: invert(0);
+    }
 
 .task-refresh {
     width: max-content;

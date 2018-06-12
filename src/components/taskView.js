@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
 import TaskMenu from './task-menu-components/taskMenu';
 import AddTask from './add-task-components/addTask';
+import NoSelection from './noSelection';
 import TaskArcDisplay from './taskArcDisplay';
 import TaskOptions from './taskOptions';
 import './style/taskView.css';
+
+function displayTestData(propsData, name, hr, min, sec) {
+    console.log(`displayTestData() props data: ${JSON.stringify(propsData)}\n`);
+    console.log(`name: ${name}\n`);
+    console.log(`hr: ${hr}\n`);
+    console.log(`min: ${min}\n`);
+    console.log(`sec: ${sec}\n\n`);
+}
 
 function precision(num) {
     return ( (num < 10 && num.toString().length < 2) ? ('0' + num) : num );
@@ -17,11 +26,19 @@ function TaskDuration({ hr, min, sec, total }) {
     );
 }
 
-function DisplayTitle({ name, total }) {
+function DisplayTitle({ name = undefined, total }) {
+    if ( name ) { //if a task is selected
+        return (
+            <div id='task-title-container'>
+                <h1 id='task-name'>{name}</h1>        
+                <small id='task-total-duration'>{'(' + precision(total.hr) + ':' + precision(total.min) + ':' + precision(total.sec) + ')'}</small>        
+            </div>
+        );
+    }
+
     return (
         <div id='task-title-container'>
-            <h1 id='task-name'>{name}</h1>        
-            <small id='task-total-duration'>{'(' + precision(total.hr) + ':' + precision(total.min) + ':' + precision(total.sec) + ')'}</small>        
+            <h1 id='task-name'>{'no task selected'}</h1>             
         </div>
     );
 }
@@ -30,15 +47,20 @@ class TaskView extends Component {
     constructor(props) {
         super(props);
 
-        this.seconds = 0; //number of seconds from the interval timer - used to update elapsed time
+        this.timerId = undefined; //keeps track of the interval timer
+
         this.state = {
             taskState: 'paused', //toggles between play/paused
 
-            taskName: this.props.task.name,
-            elapsedHr: this.props.task.totalDuration.hr - this.props.task.completedDuration.hr,
-            elapsedMin: this.props.task.totalDuration.min - this.props.task.completedDuration.min,
-            elapsedSec: this.props.task.totalDuration.sec - this.props.task.completedDuration.sec,
+            taskName: this.props.task ? this.props.task.name : undefined,
+            elapsedHr: this.props.task ? (this.props.task.totalDuration.hr - this.props.task.completedDuration.hr) : undefined,
+            elapsedMin: this.props.task ? (this.props.task.totalDuration.min - this.props.task.completedDuration.min) : undefined,
+            elapsedSec: this.props.task ? (this.props.task.totalDuration.sec - this.props.task.completedDuration.sec) : undefined,
         };
+
+        //this.updateTaskInfo = this.updateTaskInfo.bind(this); //updates task info - used when a task is removed/reselected
+        this.createTimer = this.createTimer.bind(this); //creates timer to update the task remaining time
+        this.updateTimerStatus = this.updateTimerStatus.bind(this); //updates if the timer is created or undefined based on the task state
 
         this.updateElapsedTime = this.updateElapsedTime.bind(this); //updates the elapsed time state
         this.onToggleTaskState = this.onToggleTaskState.bind(this); //toggles between play and paused
@@ -46,27 +68,40 @@ class TaskView extends Component {
     }
 
     componentDidMount() {
-        console.log('taskView component mounted - timer created');
-        this.timerId = setInterval( () => {
-            if ( this.state.taskState === 'play' ) {
-               this.updateElapsedTime();
-            }
-        }, 1000);
+        console.log('componentDidMount()');
+        displayTestData(this.props.task, this.state.taskName, this.state.elapsedHr, this.state.elapsedMin, this.state.elapsedSec);
+
+        if ( this.state.taskState === 'play' ) {
+            this.createTimer();
+        }
     }
 
     componentDidUpdate() {
+        console.log(`componentDidUpdate()`);
+        displayTestData(this.props.task, this.state.taskName, this.state.elapsedHr, this.state.elapsedMin, this.state.elapsedSec);
 
-        if ( this.state.taskName !== this.props.task.name ) { //new task selected
-            console.log('Task View componentDidUpdate(): updating duration state');
-    
-            this.setState({
-                taskState: 'paused', //new task selected - pauses until user is ready
-                
-                taskName: this.props.task.name,
-                elapsedHr: this.props.task.totalDuration.hr,
-                elapsedMin: this.props.task.totalDuration.min,
-                elapsedSec: this.props.task.totalDuration.sec
-            });
+        if ( this.props.task ) { //if a task is selected
+            console.log('componentDidUpdate() task selected');
+            if ( this.state.taskName !== this.props.task.name ) { //new task selected
+                console.log('Task View componentDidUpdate(): updating duration state');
+        
+                this.setState({
+                    taskState: 'paused', //new task selected - pauses until user is ready
+                    
+                    taskName: this.props.task.name,
+                    elapsedHr: this.props.task.totalDuration.hr,
+                    elapsedMin: this.props.task.totalDuration.min,
+                    elapsedSec: this.props.task.totalDuration.sec
+                });
+            }
+        }
+
+        else {
+            console.log('componentDidupdate() task not selected');
+
+            this.updateTimerStatus();
+            //task state is still in 'play' mode since the timer needed to be cleared in the first place
+            //updating the state to 'paused' will cause an error due to calling set state too many times
         }
     }
 
@@ -75,47 +110,78 @@ class TaskView extends Component {
         console.log('taskView unmounted - timer deleted');
     }
 
+    createTimer() {
+        this.timerId = setInterval( () => {
+            if ( this.state.taskState === 'play' ) {
+               this.updateElapsedTime();
+            }
+        }, 1000);
+    }
+
+    updateTimerStatus() {
+        if ( this.state.taskState === 'paused' ) { //task currently paused, state updating below to start task
+            console.log('updateTimerStatus(): task about to unpause');
+
+            if ( !this.timerId ) { //timer id is undefined
+                console.log('updateTimerStatus(): timer does NOT exist - creating timer');
+                this.createTimer(); //creates timer id
+            }
+        }
+
+        else if ( this.state.taskState === 'play' ) {
+            console.log('updateTimerStatus(): task about to pause');
+
+            if ( this.timerId ) { //timer id exists
+                console.log('updateTimerStatus(): timer does exist - clearing timer');                
+                clearInterval( this.timerId ); //timer id cleared - task is being paused, so timer is not needed
+                this.timerId = undefined;
+            }
+        }
+    }
+
     updateElapsedTime() {
-        let time = {
-            hr: this.state.elapsedHr,
-            min: this.state.elapsedMin,
-            sec: this.state.elapsedSec
-        };
-
-        if ( time.sec > 0 ) {
-            this.setState({
-                elapsedSec: time.sec - 1 
-            });
-        }
-
-        else if ( time.min > 0 ) {
-            this.setState({
-                elapsedSec: 59, //reset seconds
-                elapsedMin: time.min - 1
-            });
-        }
-
-        else if ( time.hr > 0 ) {
-            this.setState({
-                elapsedSec: 59, //reset seconds
-                elapsedMin: 59, //reset minutes
-                elapsedHr: time.hr - 1
-            });
-        }
-
-        else {
-            console.log('TASK COMPLETE');
-
-            this.setState({
-                taskState: 'paused'
-            });
+        if ( this.state.taskName ) { //if a task exists
+            let time = {
+                hr: this.state.elapsedHr,
+                min: this.state.elapsedMin,
+                sec: this.state.elapsedSec
+            };
+    
+            if ( time.sec > 0 ) {
+                this.setState({
+                    elapsedSec: time.sec - 1 
+                });
+            }
+    
+            else if ( time.min > 0 ) {
+                this.setState({
+                    elapsedSec: 59, //reset seconds
+                    elapsedMin: time.min - 1
+                });
+            }
+    
+            else if ( time.hr > 0 ) {
+                this.setState({
+                    elapsedSec: 59, //reset seconds
+                    elapsedMin: 59, //reset minutes
+                    elapsedHr: time.hr - 1
+                });
+            }
+    
+            else {
+                console.log('TASK COMPLETE');
+    
+                this.setState({
+                    taskState: 'paused'
+                });
+            }
         }
     }
 
     onToggleTaskState(e) {
         e.preventDefault();
-        console.log('onToggleTaskState()');
 
+        this.updateTimerStatus();
         this.setState({
             taskState: (this.state.taskState === 'play') ? 'paused' : 'play'
         });
@@ -134,9 +200,10 @@ class TaskView extends Component {
     }
 
     render() {
-        if ( this.props.task ) {
+        if ( this.props.task ) { //if a task is selected
             return (
                 <div id='taskView'>
+                
                     {
                         this.props.displayMenu ? 
                         <TaskMenu allTasks={this.props.allTasks} onTaskSelect={this.props.onTaskSelect}
@@ -157,13 +224,35 @@ class TaskView extends Component {
             );
         }
 
-        else {
-            return (
-                <div id='taskView'>
-                    <h2 id='task-name'>no task selected</h2>                    
-                </div>
-            );
-        }
+        /**
+         * {
+                        this.props.displayMenu ? 
+                        <TaskMenu allTasks={this.props.allTasks} onTaskSelect={this.props.onTaskSelect}
+                                  onThemeSelect={this.props.onThemeSelect} removeTask={this.props.removeTask} />
+                        : null
+                    }
+         */
+
+        //no task selected
+        return (
+            <div id='taskView'>
+                {
+                    this.props.displayMenu ? 
+                    <TaskMenu allTasks={this.props.allTasks} onTaskSelect={this.props.onTaskSelect}
+                                onThemeSelect={this.props.onThemeSelect} removeTask={this.props.removeTask} />
+                    : null
+                }
+                {
+                    this.props.displayAddTask ?
+                    <AddTask onClose={this.props.onToggleAddTask} createTask={this.props.createNewTask} />
+                    : null
+                }
+
+                <DisplayTitle />
+                <NoSelection />
+                <TaskOptions onToggleAddTask={this.props.onToggleAddTask} />
+            </div>
+        );
     }
 }
 

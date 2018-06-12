@@ -21,6 +21,8 @@
     --task-menu-item-bg: var(--main);
     --task-menu-item-fg: var(--accent);   
     --task-menu-item-border: var(--sixth);
+    --task-menu-item-hover-fg: var(--accent);
+    
     
     --task-view-bg: var(--main);
 
@@ -33,7 +35,7 @@
 
     --task-options-bg: var(--main);
     --task-options-border: var(--seventh);
-    --task-options-button-bg: inherit;
+    --task-options-button-bg: var(--main);
     --task-options-button-hover-bg: var(--sixth);
 
     --add-task-bg: var(--main);
@@ -47,4 +49,8 @@
     --add-task-fail-text: var(--text-fg);
     --add-task-fail-header-text: red;
     --add-task-fail-bg: var(--main);
+
+    --no-selection-bg: var(--main);    
+    --no-selection-add-button-bg: var(--accent);
+    --no-selection-add-button-border: var(--accent);    
 }

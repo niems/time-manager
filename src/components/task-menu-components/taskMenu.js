@@ -21,9 +21,6 @@ function TaskMenuOptions({ selectedOption, onOptionSelect }) {
         colorThemeImgClasses += ' selected';
     }
 
-    //let taskListClasses = (selectedOption === 'task-list-option') ? 'task-option-img-container selected' : 'task-option-img-container';
-    //let colorThemeClasses = (selectedOption === 'color-theme-option') ? 'task-option-img-container selected' : 'task-option-img-container';
-
     return (
         <div id='task-menu-options-container'>
             <span id='task-list-option' className={taskListClasses} onClick={onOptionSelect}>

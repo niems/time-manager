@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+//import TaskMenu from './components/task-menu-components/taskMenu';
 import Titlebar from './components/titlebar';
 import TaskView from './components/taskView';
 import './App.css';
@@ -232,7 +233,19 @@ class App extends Component {
     this.recentlyRemovedId = e.currentTarget.id.replace('-delete', ''); //gets the id of the selected task to remove
     let allTasks = this.state.allTasks.filter(task => task.name !== this.recentlyRemovedId); //removes the selected task from all tasks
 
-    this.setState({ allTasks });
+    if ( this.state.selectedTask ) { //selected task exists
+      if ( this.recentlyRemovedId === this.state.selectedTask.name ) { //removed task is also the selected task
+        this.setState({
+          allTasks: allTasks,
+          selectedTask: undefined,
+        });
+      }
+
+      else {
+        this.setState({ allTasks });
+      }
+    }
+
     //need to check if the task being removed is selected - clear from selected if it is
 
     setTimeout( () => {
@@ -249,8 +262,11 @@ class App extends Component {
       if ( selectedId !== this.recentlyRemovedId ) { //only allows the task to be selected if it wasn't just removed 
         console.log('\n*ENTERING onTaskSelect()');
         console.log(`onTaskSelect selection: ${selectedId}`);
-  
-        if ( selectedId !== this.state.selectedTask.name ) { //selected task is not the same as the current task
+
+        //if ( selectedId !== this.state.selectedTask.name ) { //selected task is not the same as the current task
+
+        //if no selected task exists or the current selected task differs from the user selected task
+        if ( ( typeof( this.state.selectedTask ) === 'undefined' ) || ( selectedId !== this.state.selectedTask.name ) ) {
           console.log('onTaskSelect(): new task selected - updating state');
           let selectedTask = this.state.allTasks.filter( task => task.name === selectedId );
     
@@ -359,3 +375,11 @@ class App extends Component {
 }
 
 export default App;
+/*
+{
+  this.state.displayMenu ? 
+  <TaskMenu allTasks={this.state.allTasks} onTaskSelect={this.onTaskSelect}
+            onThemeSelect={this.onColorThemeSelect} removeTask={this.removeTask} />
+  : null
+}
+*/

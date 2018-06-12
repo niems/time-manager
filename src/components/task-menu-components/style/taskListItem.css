@@ -28,9 +28,8 @@
 
 .task-list-item-container:hover {
     opacity: 1;
-    color: var(--accent);
+    color: var(--task-menu-item-hover-fg);
     transform: scale(1.05, 1.05);
-    border-radius: 0px;
 }
 
 .task-item-name {
