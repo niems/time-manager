@@ -153,6 +153,7 @@ class App extends Component {
       this.onMenu = this.onMenu.bind(this); //toggles the task menu
       this.onToggleAddTask = this.onToggleAddTask.bind(this); //toggles the add task modal window
       this.createNewTask = this.createNewTask.bind(this); //creates new task based on add task window
+      this.removeTask = this.removeTask.bind(this); //removes selected task from task menu
 
       this.onTaskSelect = this.onTaskSelect.bind(this); //selects the clicked task in the menu
       this.onColorThemeSelect = this.onColorThemeSelect.bind(this); //selects the clicked color theme in the task menu
@@ -235,9 +236,20 @@ class App extends Component {
     }
   }
 
+  removeTask(e) {
+    e.preventDefault();
+    console.log('removeTask()');
+    let id = e.currentTarget.id.replace('-delete', ''); //gets the id of the selected task to remove
+    let allTasks = this.state.allTasks.filter(task => task.name !== id); //removes the selected task from all tasks
+
+    this.setState({ allTasks });
+    //need to check if the task being removed is selected - clear from selected if it is
+  }
+
   onTaskSelect(e) {
     try {
       e.preventDefault();
+      console.log('onTaskSelect()');
       let selectedId = e.currentTarget.id;
 
       console.log('\n*ENTERING onTaskSelect()');
@@ -344,7 +356,8 @@ class App extends Component {
 
             <TaskView task={this.state.selectedTask} allTasks={this.state.allTasks} displayMenu={this.state.displayMenu}
                       onTaskSelect={this.onTaskSelect} theme={this.state.theme} onThemeSelect={this.onColorThemeSelect} 
-                      displayAddTask={this.state.displayAddTask} onToggleAddTask={this.onToggleAddTask} createNewTask={this.createNewTask} />
+                      displayAddTask={this.state.displayAddTask} onToggleAddTask={this.onToggleAddTask}
+                      createNewTask={this.createNewTask} removeTask={this.removeTask} />
         </div>
     );
   }

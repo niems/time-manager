@@ -1,6 +1,7 @@
 .task-list-item-container {
     box-sizing: border-box;
-    width: 75%;
+    position: relative;
+    width: 85%;
     min-height: 45px;
     max-height: max-content;
     
@@ -28,7 +29,7 @@
 .task-list-item-container:hover {
     opacity: 1;
     color: var(--accent);
-    transform: scale(1.1, 1.1);
+    transform: scale(1.05, 1.05);
 }
 
 .task-item-name {
@@ -38,4 +39,21 @@
 
 .task-item-duration {
     font-size: 1.05em;
+}
+
+.task-item-delete-img {
+    position: absolute;
+    right: 0%;
+    bottom: 0%;
+    height: 25px;
+    width: 25px;
+
+    background-image: url('/images/task-menu-options/delete.svg');
+
+    transition: background-image 0.75s;
+}
+
+.task-item-delete-img:hover {
+    filter: invert(.5) sepia(1) saturate(100);    
+    background-image: url('/images/task-menu-options/delete-forever.svg');    
 }

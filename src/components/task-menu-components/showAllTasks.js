@@ -2,10 +2,10 @@ import React from 'react';
 import TaskListItem from './taskListItem';
 import './style/showAllTasks.css';
 
-const ShowAllTasks = ({ allTasks, onSelect }) => {
+const ShowAllTasks = ({ allTasks, onSelect, removeTask }) => {
 
      const displayList = allTasks.map( task => (
-         <TaskListItem key={task.name} task={task} onSelect={onSelect} />
+         <TaskListItem key={task.name} task={task} onSelect={onSelect} removeTask={removeTask} />
      ));
 
     return (

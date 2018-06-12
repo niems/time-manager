@@ -13,8 +13,15 @@ function TaskDuration({ hr, min, sec, total }) {
     return (
         <div id='task-duration-container'>
             <span id='current-duration'>{precision(hr) + ':' + precision(min) + ':' + precision(sec)}</span>
-            <span id='task-duration-separator'>{' / '}</span>
-            <span id='total-duration'>{precision(total.hr) + ':' + precision(total.min) + ':' + precision(total.sec)}</span>
+        </div>
+    );
+}
+
+function DisplayTitle({ name, total }) {
+    return (
+        <div id='task-title-container'>
+            <h1 id='task-name'>{name}</h1>        
+            <small id='task-total-duration'>{'(' + precision(total.hr) + ':' + precision(total.min) + ':' + precision(total.sec) + ')'}</small>        
         </div>
     );
 }
@@ -132,7 +139,8 @@ class TaskView extends Component {
                 <div id='taskView'>
                     {
                         this.props.displayMenu ? 
-                        <TaskMenu allTasks={this.props.allTasks} onTaskSelect={this.props.onTaskSelect} onThemeSelect={this.props.onThemeSelect} />
+                        <TaskMenu allTasks={this.props.allTasks} onTaskSelect={this.props.onTaskSelect}
+                                  onThemeSelect={this.props.onThemeSelect} removeTask={this.props.removeTask} />
                         : null
                     }
                     {
@@ -141,7 +149,7 @@ class TaskView extends Component {
                         : null
                     }
 
-                    <h2 id='task-name'>{this.props.task.name}</h2>
+                    <DisplayTitle name={this.props.task.name} total={this.props.task.totalDuration} />
                     <TaskArcDisplay theme={this.props.theme} hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} />
                     <TaskDuration hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} total={this.props.task.totalDuration} />
                     <TaskOptions taskState={this.state.taskState} onToggle={this.onToggleTaskState} onRestart={this.onRestartTask} onToggleAddTask={this.props.onToggleAddTask} />

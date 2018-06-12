@@ -15,11 +15,26 @@
     background: var(--task-view-bg);
 }
 
+#task-title-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
 #task-name {
     font-variant: small-caps;
-    font-size: 1.8em;
+    font-size: 2em;
+    margin-bottom: 0px;
 
     background: var(--task-header-bg);
+    color: var(--task-header-fg);
+}
+
+#task-total-duration {
+    font-size: 0.75em;
+    font-style: italic;
+    font-weight: bold;
     color: var(--task-header-fg);
 }
 

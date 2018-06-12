@@ -37,10 +37,10 @@ function TaskMenuOptions({ selectedOption, onOptionSelect }) {
     );
 }
 
-function DisplayMenuSelection({ selected, allTasks, onTaskSelect, onThemeSelect }) {
+function DisplayMenuSelection({ selected, allTasks, onTaskSelect, onThemeSelect, removeTask }) {
     if ( selected === 'task-list-option' ) {
         return (
-            <ShowAllTasks allTasks={allTasks} onSelect={onTaskSelect} />
+            <ShowAllTasks allTasks={allTasks} onSelect={onTaskSelect} removeTask={removeTask} />
         );
     }
 
@@ -86,7 +86,8 @@ class TaskMenu extends Component {
                 <TaskMenuOptions selectedOption={this.state.selectedOption} onOptionSelect={this.onOptionSelect} />
                 
                 <DisplayMenuSelection selected={this.state.selectedOption} allTasks={this.props.allTasks}
-                                      onTaskSelect={this.props.onTaskSelect} onThemeSelect={this.props.onThemeSelect} />
+                                      onTaskSelect={this.props.onTaskSelect} onThemeSelect={this.props.onThemeSelect} 
+                                      removeTask={this.props.removeTask} />
             </div>
         );
     }

@@ -8,11 +8,12 @@ function formatDuration(duration) {
     return ( formatNum( duration.hr ) + ':' + formatNum( duration.min ) + ':' + formatNum( duration.sec ) );
 }
 
-const TaskListItem = ({ task, onSelect }) => {
+const TaskListItem = ({ task, onSelect, removeTask }) => {
     return (
         <li className='task-list-item-container' id={task.name} onClick={onSelect}>
-                <span className='task-item-name'>{task.name}</span>
-                <span className='task-item-duration'>{formatDuration(task.totalDuration)}</span>
+            <span className='task-item-delete-img' id={task.name + '-delete'} onClick={removeTask}></span>
+            <span className='task-item-name'>{task.name}</span>
+            <span className='task-item-duration'>{formatDuration(task.totalDuration)}</span>
         </li>
     );
 }
