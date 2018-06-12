@@ -392,10 +392,8 @@ class App extends Component {
             {this.state.displayAddTaskSuccess ? <DisplayAddTaskSuccess /> : null}
             {this.state.displayAddTaskFail ? <DisplayAddTaskFail /> : null}
 
-            <TaskView task={this.state.selectedTask} allTasks={this.state.allTasks} displayMenu={this.state.displayMenu}
-                      onTaskSelect={this.onTaskSelect} theme={this.state.theme} onThemeSelect={this.onColorThemeSelect} 
-                      displayAddTask={this.state.displayAddTask} onToggleAddTask={this.onToggleAddTask}
-                      createNewTask={this.createNewTask} removeTask={this.removeTask} />
+            <TaskView task={this.state.selectedTask} allTasks={this.state.allTasks}
+                      theme={this.state.theme} onToggleAddTask={this.onToggleAddTask} />
         </div>
     );
   }
