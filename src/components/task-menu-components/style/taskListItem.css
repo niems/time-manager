@@ -1,7 +1,8 @@
 .task-list-item-container {
     box-sizing: border-box;
     width: 75%;
-    height: max-content;
+    min-height: 45px;
+    max-height: max-content;
     
     padding: 10px;
     margin: 10px 0px;

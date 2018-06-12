@@ -7,7 +7,9 @@
 
     --text-fg: #090a0a;
 
-    
+    --scrollbar-track-bg: var(--ten);
+    --scrollbar-thumb-bg: white;
+
     --titlebar-bg: var(--sixth);
 
     --task-menu-bg: var(--main);
@@ -39,10 +41,10 @@
     --add-task-inputfield-border: var(--accent);
     --add-task-duration-separator: var(--accent);
 
-    --add-task-success-text: var(--accent);
+    --add-task-success-text: var(--text-fg);
     --add-task-success-bg: var(--main);
 
-    --add-task-fail-text: var(--ten);
+    --add-task-fail-text: var(--text-fg);
     --add-task-fail-header-text: red;
     --add-task-fail-bg: var(--main);
 }

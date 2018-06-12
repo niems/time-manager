@@ -112,3 +112,16 @@
 }
 
 /**END failed to add task setup */
+
+::-webkit-scrollbar {
+    width: 4px;
+    padding: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb-bg);
+}
