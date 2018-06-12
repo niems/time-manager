@@ -148,14 +148,11 @@ class App extends Component {
 
     let doesTaskExist = this.state.allTasks.filter( t => t.name.toLocaleLowerCase() === task.name.toLocaleLowerCase() ); //filters all out except for the same task name if it exists
 
-    if ( !doesTaskExist.length  ) { 
+    if ( !doesTaskExist.length  ) {  //if task didn't already exist
       console.log('createNewTask(): adding new task to all tasks :D');
       let allTasks = this.state.allTasks;
-  
-      //check for unique name before adding
-      //
-  
-      allTasks.unshift({
+      
+      let taskToAdd = {
         name: task.name,
         completedDuration: {
           hr: 0,
@@ -167,19 +164,31 @@ class App extends Component {
           min: task.min,
           sec: task.sec
         }
-      });
-  
-      this.setState({ 
-        allTasks: allTasks,
-        displayAddTaskSuccess: true
-      });
+      };
+      
+      
+      allTasks.unshift( taskToAdd );
+      
+      if ( allTasks.length > 1 ) { //tasks existed before adding this task
+        this.setState({ 
+          allTasks: allTasks,
+          displayAddTaskSuccess: true
+        });
+      }
+
+      else { //no tasks previously existed - select added task
+        this.setState({
+          allTasks: allTasks,
+          selectedTask: allTasks[0], //selects new task
+          displayAddTaskSuccess: true
+        })
+      }
 
       setTimeout( () => {
         this.setState({
           displayAddTaskSuccess: false
         })
       }, 2000);
-      //display task successfully added modal here, then use setTimeout to remove it
     }
 
     else {
@@ -225,8 +234,6 @@ class App extends Component {
       console.log('removeTask(): selected task does not exist - removing task & updating state');
       this.setState({ allTasks });
     }
-
-    //need to check if the task being removed is selected - clear from selected if it is
 
     setTimeout( () => {
       this.recentlyRemovedId = undefined; //reset
