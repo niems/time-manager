@@ -251,12 +251,15 @@ class App extends Component {
 
   removeTask(e) {
     e.preventDefault();
-    console.log('removeTask()');
     this.recentlyRemovedId = e.currentTarget.id.replace('-delete', ''); //gets the id of the selected task to remove
+    console.log(`removeTask() attempting to remove: ${this.recentlyRemovedId}\n`);
+
     let allTasks = this.state.allTasks.filter(task => task.name !== this.recentlyRemovedId); //removes the selected task from all tasks
 
     if ( this.state.selectedTask ) { //selected task exists
+      console.log('removeTask(): selected task exists');
       if ( this.recentlyRemovedId === this.state.selectedTask.name ) { //removed task is also the selected task
+        console.log('removeTask(): task to remove is also selected task');
         this.setState({
           allTasks: allTasks,
           selectedTask: undefined,
@@ -264,8 +267,14 @@ class App extends Component {
       }
 
       else {
+        console.log('removeTask(): task to remove is NOT selected task');
         this.setState({ allTasks });
       }
+    }
+
+    else {
+      console.log('removeTask(): selected task does not exist - removing task & updating state');
+      this.setState({ allTasks });
     }
 
     //need to check if the task being removed is selected - clear from selected if it is
