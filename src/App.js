@@ -20,6 +20,23 @@ function isElectron() {
   
 const isElectronRunning = isElectron();
 
+function DisplayAddTaskSuccess(props) {
+  return (
+    <div id='add-task-success-container'>
+      <h3 id='add-task-success-title'>Task successfully added :D</h3>
+    </div>
+  );
+}
+
+function DisplayAddTaskFail(props) {
+  return (
+    <div id='add-task-fail-container'>
+      <h3 id='add-task-fail-title'>Error</h3>
+      <p id='add-task-fail-msg'>Task not added: already exists :o</p>
+    </div>
+  );
+}
+
 class App extends Component {
   constructor(props) {
       super(props);
@@ -38,7 +55,11 @@ class App extends Component {
        */
       this.state = {
           displayMenu: false, //displays the task menu component
-          displayAddTask: true, //displays the task add component
+
+          displayAddTask: false, //displays the task add component
+          displayAddTaskSuccess: false, //displays successfully added task window
+          displayAddTaskFail: false, //displays failed to add task window
+
           theme: {
             id: 'dark-theme',
             path: './themes/dark-theme.css',
@@ -185,11 +206,32 @@ class App extends Component {
         }
       });
   
-      this.setState({ allTasks });
+      this.setState({ 
+        allTasks: allTasks,
+        displayAddTaskSuccess: true
+      });
+
+      setTimeout( () => {
+        this.setState({
+          displayAddTaskSuccess: false
+        })
+      }, 2000);
+      //display task successfully added modal here, then use setTimeout to remove it
     }
 
     else {
       console.log('createNewTask(): task already exists - no action taken');
+      //display failed to add task modal here, then use setTimeout to remove it
+
+      this.setState({
+        displayAddTaskFail: true
+      });
+
+      setTimeout( () => {
+        this.setState({
+          displayAddTaskFail: false
+        });
+      }, 2000);
     }
   }
 
@@ -296,6 +338,9 @@ class App extends Component {
         <div className='wrapper'>
             <link rel='stylesheet' href={this.state.theme.path} />
             <Titlebar onMenu={this.onMenu} onClose={this.onClose} />
+
+            {this.state.displayAddTaskSuccess ? <DisplayAddTaskSuccess /> : null}
+            {this.state.displayAddTaskFail ? <DisplayAddTaskFail /> : null}
 
             <TaskView task={this.state.selectedTask} allTasks={this.state.allTasks} displayMenu={this.state.displayMenu}
                       onTaskSelect={this.onTaskSelect} theme={this.state.theme} onThemeSelect={this.onColorThemeSelect} 

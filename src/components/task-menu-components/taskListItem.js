@@ -1,8 +1,7 @@
 import React from 'react';
 import './style/taskListItem.css';
-
 function formatNum(num) {
-    return( num < 10 ? ('0' + num) : num );
+    return ( (num < 10 && num.toString().length < 2) ? ('0' + num) : num );
 }
 
 function formatDuration(duration) {

@@ -2,10 +2,98 @@
     width: 100vw;
     height: 100vh;
 
+    position: relative;
+
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
     align-items: center;
 
     overflow: hidden;
+}
+
+@keyframes add-task-fade {
+    0% {
+        opacity: 0;
+        transform: scale(0.5, 0.5);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.25, 1.25);
+    }
+}
+
+@keyframes add-task-failed-exit {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+#add-task-success-container {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    
+    z-index: 5;
+    width: 80%;
+    height: 20%;
+    border-radius: 10px;
+    opacity: 0;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    font-variant: small-caps;
+
+    color: var(--accent);
+    background: var(--task-menu-bg);
+    box-shadow: 2px 2px 5px black;       
+
+    animation-name: add-task-fade;
+    animation-duration: 1.5s;
+}
+
+#add-task-fail-container {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    
+    z-index: 5;
+    width: 80%;
+    height: 20%;
+    border-radius: 10px;
+    opacity: 0;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    font-variant: small-caps;
+
+    color: red;
+    background: var(--task-menu-bg);
+    box-shadow: 2px 2px 5px black;       
+
+    animation-name: add-task-failed-exit;
+    animation-duration: 2s;
 }

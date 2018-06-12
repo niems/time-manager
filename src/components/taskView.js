@@ -6,7 +6,7 @@ import TaskOptions from './taskOptions';
 import './style/taskView.css';
 
 function precision(num) {
-    return ( (num < 10) ? ('0' + num) : num );
+    return ( (num < 10 && num.toString().length < 2) ? ('0' + num) : num );
 }
 
 function TaskDuration({ hr, min, sec, total }) {
