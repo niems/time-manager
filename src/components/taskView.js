@@ -203,13 +203,6 @@ class TaskView extends Component {
         if ( this.props.task ) { //if a task is selected
             return (
                 <div id='taskView'>
-                
-                    {
-                        this.props.displayMenu ? 
-                        <TaskMenu allTasks={this.props.allTasks} onTaskSelect={this.props.onTaskSelect}
-                                  onThemeSelect={this.props.onThemeSelect} removeTask={this.props.removeTask} />
-                        : null
-                    }
                     {
                         this.props.displayAddTask ?
                         <AddTask onClose={this.props.onToggleAddTask} createTask={this.props.createNewTask} />
@@ -224,24 +217,9 @@ class TaskView extends Component {
             );
         }
 
-        /**
-         * {
-                        this.props.displayMenu ? 
-                        <TaskMenu allTasks={this.props.allTasks} onTaskSelect={this.props.onTaskSelect}
-                                  onThemeSelect={this.props.onThemeSelect} removeTask={this.props.removeTask} />
-                        : null
-                    }
-         */
-
         //no task selected
         return (
             <div id='taskView'>
-                {
-                    this.props.displayMenu ? 
-                    <TaskMenu allTasks={this.props.allTasks} onTaskSelect={this.props.onTaskSelect}
-                                onThemeSelect={this.props.onThemeSelect} removeTask={this.props.removeTask} />
-                    : null
-                }
                 {
                     this.props.displayAddTask ?
                     <AddTask onClose={this.props.onToggleAddTask} createTask={this.props.createNewTask} />

@@ -1,10 +1,11 @@
 :root {
-    --main: rgb(176, 191, 218);
+    --main: #b0bfda;
     --ten: rgb(37, 37, 37);
-    --accent: #BB86FC;
+    --accent: #8196BB;
     --accent-two: #020607;    
-    --sixth: rgb(183, 197, 224);
-    --seventh:rgb(171, 184, 204);
+    --accent-three: #365180;
+    --sixth: #b7c5e0;
+    --seventh:#abb8cc;
 
     --text-fg: #090a0a;
 
@@ -38,10 +39,10 @@
     --task-options-button-bg: var(--main);
     --task-options-button-hover-bg: var(--sixth);
 
-    --add-task-bg: var(--main);
+    --add-task-bg: var(--accent);
     --add-task-fg: var(--text-fg);
-    --add-task-inputfield-border: var(--accent-two);
-    --add-task-duration-separator: var(--accent-two);
+    --add-task-inputfield-border: var(--accent-three);
+    --add-task-duration-separator: var(--accent-three);
 
     --add-task-success-text: var(--text-fg);
     --add-task-success-bg: var(--main);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import TaskMenu from './components/task-menu-components/taskMenu';
+import TaskMenu from './components/task-menu-components/taskMenu';
 import Titlebar from './components/titlebar';
 import TaskView from './components/taskView';
 import './App.css';
@@ -362,6 +362,13 @@ class App extends Component {
             <link rel='stylesheet' href={this.state.theme.path} />
             <Titlebar onMenu={this.onMenu} onClose={this.onClose} />
 
+            {
+              this.state.displayMenu ? 
+              <TaskMenu allTasks={this.state.allTasks} onTaskSelect={this.onTaskSelect}
+                        onThemeSelect={this.onColorThemeSelect} removeTask={this.removeTask} />
+              : null
+            }
+
             {this.state.displayAddTaskSuccess ? <DisplayAddTaskSuccess /> : null}
             {this.state.displayAddTaskFail ? <DisplayAddTaskFail /> : null}
 
@@ -376,10 +383,5 @@ class App extends Component {
 
 export default App;
 /*
-{
-  this.state.displayMenu ? 
-  <TaskMenu allTasks={this.state.allTasks} onTaskSelect={this.onTaskSelect}
-            onThemeSelect={this.onColorThemeSelect} removeTask={this.removeTask} />
-  : null
-}
+
 */
