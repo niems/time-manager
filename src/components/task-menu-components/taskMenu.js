@@ -11,6 +11,9 @@ function TaskMenuOptions({ selectedOption, onOptionSelect }) {
     let colorThemeClasses = 'task-option-img-container';
     let colorThemeImgClasses = 'task-menu-option-img';
 
+    let fileThemeClasses = 'task-option-img-container';
+    let fileThemeImgClasses='task-menu-option-img';
+
     if ( selectedOption === 'task-list-option' ) {
         taskListClasses += ' selected';
         taskListImgClasses += ' selected';
@@ -21,10 +24,19 @@ function TaskMenuOptions({ selectedOption, onOptionSelect }) {
         colorThemeImgClasses += ' selected';
     }
 
+    else if ( selectedOption === 'file-option' ) {
+        fileThemeClasses += ' selected';
+        fileThemeImgClasses += ' selected';
+    }
+
     return (
         <div id='task-menu-options-container'>
             <span id='task-list-option' className={taskListClasses} onClick={onOptionSelect}>
                 <img className={taskListImgClasses} src='./images/task-menu-options/task-list.svg' alt='failed to load task list img' />
+            </span>
+
+            <span id='file-option' className={fileThemeClasses} onClick={onOptionSelect}>
+                <img className={fileThemeImgClasses} src='./images/task-menu-options/folder.svg' alt='failed to load folder img' />
             </span>
 
             <span id='color-theme-option' className={colorThemeClasses} onClick={onOptionSelect}>
@@ -47,6 +59,12 @@ function DisplayMenuSelection({ selected, allTasks, onTaskSelect, onThemeSelect,
         );
     }
 
+    else if ( selected === 'file-option' ) {
+        return (
+            null
+        );
+    }
+
     return null;
 }
 
@@ -66,7 +84,8 @@ class TaskMenu extends Component {
         let userOption = e.currentTarget.id;
 
         if ( userOption !== this.state.selectedOption ) {
-            console.log('onOptionSelect() new option selected - updating state');
+            console.log(`onOptionSelect() new option selected - updating state for ${userOption}\n`);
+
             this.setState({
                 selectedOption: userOption
             });
