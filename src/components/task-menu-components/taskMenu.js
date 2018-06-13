@@ -1,18 +1,21 @@
 import React, {Component} from 'react';
 import ShowAllTasks from './showAllTasks';
+//import FileMenu from './fileMenu';
 import ColorThemeOptions from './colorThemeOptions';
 import './style/taskMenu.css';
 
 function TaskMenuOptions({ selectedOption, onOptionSelect }) {
-    //if selected, add .selected class for underlining
     let taskListClasses = 'task-option-img-container';
     let taskListImgClasses = 'task-menu-option-img';
 
     let colorThemeClasses = 'task-option-img-container';
     let colorThemeImgClasses = 'task-menu-option-img';
 
-    let fileThemeClasses = 'task-option-img-container';
-    let fileThemeImgClasses='task-menu-option-img';
+    let loadFileClasses = 'task-option-img-container';
+    let loadFileImgClasses='task-menu-option-img';
+
+    let saveFileClasses = 'task-option-img-container';
+    let saveFileImgClasses = 'task-menu-option-img';
 
     if ( selectedOption === 'task-list-option' ) {
         taskListClasses += ' selected';
@@ -24,19 +27,20 @@ function TaskMenuOptions({ selectedOption, onOptionSelect }) {
         colorThemeImgClasses += ' selected';
     }
 
-    else if ( selectedOption === 'file-option' ) {
-        fileThemeClasses += ' selected';
-        fileThemeImgClasses += ' selected';
+    else if ( selectedOption === 'load-file-option' ) {
+        loadFileClasses += ' selected';
+        loadFileImgClasses += ' selected';
+    }
+
+    else if ( selectedOption === 'save-file-option' ) {
+        saveFileClasses += ' selected';
+        saveFileImgClasses += ' selected';
     }
 
     return (
         <div id='task-menu-options-container'>
             <span id='task-list-option' className={taskListClasses} onClick={onOptionSelect}>
                 <img className={taskListImgClasses} src='./images/task-menu-options/task-list.svg' alt='failed to load task list img' />
-            </span>
-
-            <span id='file-option' className={fileThemeClasses} onClick={onOptionSelect}>
-                <img className={fileThemeImgClasses} src='./images/task-menu-options/folder.svg' alt='failed to load folder img' />
             </span>
 
             <span id='color-theme-option' className={colorThemeClasses} onClick={onOptionSelect}>
@@ -46,7 +50,7 @@ function TaskMenuOptions({ selectedOption, onOptionSelect }) {
     );
 }
 
-function DisplayMenuSelection({ selected, allTasks, onTaskSelect, onThemeSelect, removeTask }) {
+function DisplayMenuSelection({ selected, allTasks, onTaskSelect, onThemeSelect, removeTask, onSave }) {
     if ( selected === 'task-list-option' ) {
         return (
             <ShowAllTasks allTasks={allTasks} onSelect={onTaskSelect} removeTask={removeTask} />
@@ -59,11 +63,23 @@ function DisplayMenuSelection({ selected, allTasks, onTaskSelect, onThemeSelect,
         );
     }
 
-    else if ( selected === 'file-option' ) {
+    /*
+    else if ( selected === 'load-file-option' ) {
+        return (
+            <FileMenu load={true}/>
+        );
+    }
+
+    else if ( selected === 'save-file-option' ) {
+        console.log('save file option not coded D:');
+
+        onSave();
+        
         return (
             null
         );
     }
+    */
 
     return null;
 }
@@ -103,7 +119,7 @@ class TaskMenu extends Component {
                 
                 <DisplayMenuSelection selected={this.state.selectedOption} allTasks={this.props.allTasks}
                                       onTaskSelect={this.props.onTaskSelect} onThemeSelect={this.props.onThemeSelect} 
-                                      removeTask={this.props.removeTask} />
+                                      removeTask={this.props.removeTask} onSave={this.props.onSave} />
             </div>
         );
     }

@@ -50,6 +50,19 @@
     box-shadow: 1px 0px 3px black;
 }
 
+.task-menu-option {
+    box-sizing: border-box;   
+    width: max-content;
+    height: max-content;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    background: white;
+}
+
 .task-option-img-container {
     box-sizing: border-box;
     width: max-content;
@@ -66,6 +79,7 @@
     .task-option-img-container.selected {
         opacity: 1;
     }
+
 
 .task-menu-option-img {
     box-sizing: border-box;

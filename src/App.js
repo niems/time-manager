@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FileSaver from 'file-saver';
 import TaskMenu from './components/task-menu-components/taskMenu';
 import AddTask from './components/add-task-components/addTask';
 import Titlebar from './components/titlebar';
@@ -22,11 +23,11 @@ function isElectron() {
   
 const isElectronRunning = isElectron();
 
-function DisplayMenu({ displayMenu, allTasks, onTaskSelect, onThemeSelect, removeTask }) {
+function DisplayMenu({ displayMenu, allTasks, onTaskSelect, onThemeSelect, removeTask, onSave }) {
   if ( displayMenu ) { //if the menu should be displayed
     return (
-      <TaskMenu allTasks={allTasks} onTaskSelect={onTaskSelect}
-                onThemeSelect={onThemeSelect} removeTask={removeTask} />
+      <TaskMenu allTasks={allTasks} onTaskSelect={onTaskSelect} onThemeSelect={onThemeSelect}
+                removeTask={removeTask} onSave={onSave} />
     );
   }
 
@@ -43,18 +44,18 @@ function DisplayAddTask({ displayAddTask, onClose, createTask }) {
   return null;
 }
 
-function DisplayAddTaskSuccess(props) {
+function DisplayAddTaskSuccess({ name }) {
   return (
     <div id='add-task-success-container'>
-      <h3 id='add-task-success-title'>Task successfully added :D</h3>
+      <h3 id='add-task-success-title'><span id='add-task-success-name'>{`"${name}"`}</span>{` added to tasks :D`}</h3>
     </div>
   );
 }
 
-function DisplayAddTaskFail(props) {
+function DisplayAddTaskFail({ name }) {
   return (
     <div id='add-task-fail-container'>
-      <h3 id='add-task-fail-title'><span id='add-task-error-title'>Error</span>: task exists</h3>
+      <h3 id='add-task-fail-title'><span id='add-task-error-title'>Error</span>{`: "${name}" exists`}</h3>
       <span id='add-task-fail-msg'>The task already exists - no action taken </span>
     </div>
   );
@@ -65,6 +66,7 @@ class App extends Component {
       super(props);
 
       this.recentlyRemovedId = undefined; //keeps the removed task (less than a second ago) from also being selected
+      this.failedToAddTaskId = undefined; //used to display the name of the task that was not added in error message
 
       this.state = {
           displayMenu: false, //displays the task menu component
@@ -91,9 +93,9 @@ class App extends Component {
               sec: 0
             },
             totalDuration: {
-                hr: 10,
-                min: 0,
-                sec: 0
+                hr: 2,
+                min: 5,
+                sec: 30
             }
           },
           {
@@ -116,6 +118,8 @@ class App extends Component {
       this.onToggleAddTask = this.onToggleAddTask.bind(this); //toggles the add task modal window
       this.createNewTask = this.createNewTask.bind(this); //creates new task based on add task window
       this.removeTask = this.removeTask.bind(this); //removes selected task from task menu
+
+      this.onSaveTasks = this.onSaveTasks.bind(this); //saves all tasks as a JSON object to a text file
 
       this.onTaskSelect = this.onTaskSelect.bind(this); //selects the clicked task in the menu
       this.onColorThemeSelect = this.onColorThemeSelect.bind(this); //selects the clicked color theme in the task menu
@@ -195,11 +199,14 @@ class App extends Component {
       console.log('createNewTask(): task already exists - no action taken');
       //display failed to add task modal here, then use setTimeout to remove it
 
+      this.failedToAddTaskId = task.name; //used in error message
       this.setState({
         displayAddTaskFail: true
       });
 
       setTimeout( () => {
+        this.failedToAddTaskId = undefined;
+
         this.setState({
           displayAddTaskFail: false
         });
@@ -238,6 +245,13 @@ class App extends Component {
     setTimeout( () => {
       this.recentlyRemovedId = undefined; //reset
     }, 1000);
+  }
+
+  onSaveTasks() {
+    console.log('onSaveTasks()');
+
+    let blob = new Blob([ JSON.stringify( this.state.allTasks ) ], {type: 'text/plain; charset=utf-8'});
+        FileSaver.saveAs(blob, 'tasks.txt');
   }
 
   onTaskSelect(e) {
@@ -350,11 +364,11 @@ class App extends Component {
             <Titlebar onMenu={this.onMenu} onClose={this.onClose} />
 
             <DisplayMenu displayMenu={this.state.displayMenu} allTasks={this.state.allTasks} onTaskSelect={this.onTaskSelect}
-                         onThemeSelect={this.onColorThemeSelect} removeTask={this.removeTask} />
+                         onThemeSelect={this.onColorThemeSelect} removeTask={this.removeTask} onSave={this.onSaveTasks} />
             
             <DisplayAddTask displayAddTask={this.state.displayAddTask} onClose={this.onToggleAddTask} createTask={this.createNewTask} />
-            {this.state.displayAddTaskSuccess ? <DisplayAddTaskSuccess /> : null}
-            {this.state.displayAddTaskFail ? <DisplayAddTaskFail /> : null}
+            {this.state.displayAddTaskSuccess ? <DisplayAddTaskSuccess name={this.state.allTasks[0].name} /> : null}
+            {this.state.displayAddTaskFail ? <DisplayAddTaskFail name={this.failedToAddTaskId} /> : null}
 
             <TaskView task={this.state.selectedTask} allTasks={this.state.allTasks}
                       theme={this.state.theme} onToggleAddTask={this.onToggleAddTask} />

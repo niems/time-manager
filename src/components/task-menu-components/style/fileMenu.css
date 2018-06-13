@@ -1,0 +1,45 @@
+#file-menu-container {
+    box-sizing: border-box;
+    width: 90%;
+    height: 95%;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+    padding: 10px 0px;
+    margin: 0px 10px;
+
+    background: var(--task-menu-list-bg);
+    box-shadow: 2px 2px 5px black;    
+}
+
+.file-menu-input-selection {
+    opacity: 1;
+}
+
+
+/**video test setup */
+#video-test-container {
+    box-sizing: border-box;
+    width: 90%;
+    height: 95%;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+    padding: 10px 0px;
+    margin: 0px 10px;
+
+    background: var(--task-menu-list-bg);
+    box-shadow: 2px 2px 5px black;    
+}
+
+#video-stream {
+   
+}
