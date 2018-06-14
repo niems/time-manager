@@ -1,3 +1,4 @@
+/*
 .task-options-container {
     box-sizing: border-box;
     width: inherit;
@@ -128,5 +129,190 @@
 
     filter: invert(1);
 }
+*/
+
+#task-options-container {
+    box-sizing: border-box;
+    width: inherit;
+    min-height: 45px;
+    max-height: 45px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    padding: 5px;
+
+    position: relative;
+
+    border-style: solid none none none;
+    border-width: 2px;
+    border-color: var(--task-options-border);
+
+    background: var(--task-options-bg);
+}
+
+.task-option-refresh-container {
+    box-sizing: border-box;
+    min-width: 45px;
+    max-width: 45px;
+    min-height: 110px;
+    max-height: 110px;
+
+    position: relative;
+    right: -40%;
+    top: -65px;
+    padding: 5px 2px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 8px;
+    border-style: solid none;
+    border-width: 0px;
+    border-color: var(--accent);
+
+    background: inherit; 
+}
+
+.task-option-refresh-container.display {
+    border-width: 2px;
+}
+
+@keyframes refresh-enter-anim {
+    from {
+        top: 50%;
+        opacity: 0.2;
+    }
+
+    to {
+        
+    }
+}
+
+.task-refresh {
+    display: none;
+    width: max-content;
+    height: max-content;
+
+    margin: 5px;
+    border-radius: 10px;
+    outline: none;
+
+    position: absolute;
+    top: 0%;
+    left: 0%;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--task-options-border);
+
+    background-color: var(--task-options-button-bg);
+    box-shadow: 0px 1px 3px black;
+
+    transition: all 0.4s;
+}
+
+.task-refresh.display {
+    display: block;
+
+    animation-name: refresh-enter-anim;
+    animation-duration: 0.6s;
+}
+
+.task-refresh:hover {
+    background-color: var(--task-options-button-hover-bg);
+    transform: scale(1.1, 1.1);    
+}
+
+.task-refresh.display:hover {
+    background: var(--accent);
+    transform: scale(1.1, 1.1);    
+}
+
+.task-refresh-img {
+    width: 22px;
+    height: 25px;
+    filter: invert(1);
+}
+    .task-refresh-img.no-selection {
+        filter: invert(0);
+    }
+
+.task-quick-add {
+    box-sizing: border-box;
+    width: max-content;
+    height: max-content;
+    z-index: 1;
+
+    margin: 5px;
+    border-radius: 10px;
+    outline: none;
+
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+
+    border-style: solid;
+    border-width: 1px;
+    
+    background: var(--task-options-button-bg);
+    border-color: var(--task-options-border);
+    box-shadow: 0px 1px 3px black;
+    
+    transition: all 0.4s;
+}
+
+.task-quick-add:hover {
+    transform: scale(1.1, 1.1);    
+    background-color: var(--accent);
+}
+.task-quick-add.no-selection:hover {
+    transform: scale(1.1, 1.1);
+    background-color: var(--accent);
+}
 
 
+.task-quick-add-img {
+    width: 22px;
+    height: 25px;
+
+    filter: invert(1);
+}
+    .task-quick-add-img.no-selection {
+        filter: invert(0);
+    }
+
+.task-toggle-button {  
+    width: max-content;
+    height: max-content;
+    
+    overflow: hidden;
+    outline: none;
+    margin: 0px;
+
+    position: absolute;
+    
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: var(--task-options-border);
+    background: var(--task-options-button-bg);
+    box-shadow: 0px 2px 5px black;
+    
+    transition: all 0.4s;
+}
+
+.task-toggle-button:hover {
+    background: var(--task-options-button-hover-bg);
+    transform: scale(1.1, 1.1);
+}
+
+.task-option-img {
+    width: 25px;
+    height: 25px;
+
+    filter: invert(1);
+}

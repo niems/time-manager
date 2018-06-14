@@ -120,6 +120,7 @@ class App extends Component {
       this.removeTask = this.removeTask.bind(this); //removes selected task from task menu
 
       this.onSaveTasks = this.onSaveTasks.bind(this); //saves all tasks as a JSON object to a text file
+      this.onLoadTasks = this.onLoadTasks.bind(this); //loads tasks from user selected file
 
       this.onTaskSelect = this.onTaskSelect.bind(this); //selects the clicked task in the menu
       this.onColorThemeSelect = this.onColorThemeSelect.bind(this); //selects the clicked color theme in the task menu
@@ -252,6 +253,17 @@ class App extends Component {
 
     let blob = new Blob([ JSON.stringify( this.state.allTasks ) ], {type: 'text/plain; charset=utf-8'});
         FileSaver.saveAs(blob, 'tasks.txt');
+  }
+
+  onLoadTasks(file) {
+    console.log('onLoadTasks()');
+
+    let reader = new FileReader();
+
+    reader.onload = (e) => {
+      console.log(`onLoadTasks() data loaded: ${reader.result}`);
+      
+    }
   }
 
   onTaskSelect(e) {
