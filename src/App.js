@@ -153,7 +153,7 @@ class App extends Component {
 
     let doesTaskExist = this.state.allTasks.filter( t => t.name.toLocaleLowerCase() === task.name.toLocaleLowerCase() ); //filters all out except for the same task name if it exists
 
-    if ( !doesTaskExist.length  ) {  //if task didn't already exist
+    if ( !doesTaskExist.length  ) {  //if SAME task doesn't already exist
       console.log('createNewTask(): adding new task to all tasks :D');
       let allTasks = this.state.allTasks;
       
@@ -174,7 +174,7 @@ class App extends Component {
       
       allTasks.unshift( taskToAdd );
       
-      if ( allTasks.length > 1 ) { //tasks existed before adding this task
+      if ( typeof( this.state.selectedTask ) !== 'undefined' ) { //if a task is currently selected
         this.setState({ 
           allTasks: allTasks,
           displayAddTaskSuccess: true
