@@ -15,9 +15,13 @@ class TaskOptions extends Component {
 
         this.onFileHover = this.onFileHover.bind(this); //called when the mouse enters the display file container
         this.onFileHoverExit = this.onFileHoverExit.bind(this); //called when the mouse exits the display file container
+        
+        this.onLoad = this.onLoad.bind(this);  //called when the load file button is clicked - user chooses file to load, then passes back to app.js to store data
 
         this.loadRef = undefined; //stores the reference for the load file button
-        this.onLoad = this.onLoad.bind(this);  //called when the load file button is clicked - user chooses file to load, then passes back to app.js to store data
+        this.setLoadRef = element => {
+            this.loadRef = element;
+        }
     }
 
     //mouse entered hovering over display task container
@@ -60,7 +64,17 @@ class TaskOptions extends Component {
         e.preventDefault();
 
         if ( this.loadRef ) { //reference for load button exists
-            
+            console.log('onLoad() ref exists');
+
+            /*
+            let reader = new FileReader();
+
+            reader.onload = (e) => {
+                console.log(`onLoad() reader results: ${reader.result}`);
+            }
+
+            reader.readAsText()
+            */
         }
     }
 
@@ -76,13 +90,13 @@ class TaskOptions extends Component {
 
         
         if ( this.props.taskState ) { //if task state is defined - undefined means no task is selected
-            console.log('render() task state is defined');
+            //console.log('render() task state is defined');
             let buttonImgSrc = ( this.props.taskState === 'play' ) ? './images/task-options/pause.svg' : './images/task-options/play.svg';
 
             return (
                 <div id='task-options-container'>
                     <div id='file-container' className={optionContainerClass} onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
-                        <button id={loadButtonId} className={taskButtonClass} onClick={this.onLoad} ref={load => { this.loadRef = load; } }>
+                        <button id={loadButtonId} className={taskButtonClass} onClick={this.onLoad} ref={this.setLoadRef}>
                             <img className={taskButtonImgClass} src='./images/task-menu-options/load-file.svg' alt='failed to load "load" img' />
                         </button>
 
@@ -108,12 +122,12 @@ class TaskOptions extends Component {
             );
         }
 
-        console.log('render() task state is NOT defined');
+        //console.log('render() task state is NOT defined');
         //runs if no task is selected
         return (
             <div id='task-options-container'>
                 <div id='file-container' className={optionContainerClass} onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
-                    <button id={loadButtonId} className={taskButtonClass} onClick={this.onLoad}>
+                    <button id={loadButtonId} className={taskButtonClass} onClick={this.onLoad} ref={this.setLoadRef}>
                         <img className={taskButtonImgClass} src='./images/task-menu-options/load-file.svg' alt='failed to load "load" img' />
                     </button>
 

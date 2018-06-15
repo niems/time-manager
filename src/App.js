@@ -340,8 +340,8 @@ class App extends Component {
           theme: {
             id: 'light-theme',
             path: './themes/light-theme.css',
-            arcFill: '#869BBD',
-            arcStroke: '#020607'
+            arcFill: 'transparent',
+            arcStroke: '#B983F8'
           }
         });
       }

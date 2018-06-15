@@ -1,6 +1,7 @@
 :root {
     --main: #b0bfda;
-    --ten: rgb(37, 37, 37);
+    --main-dark: #8196BB;
+    --ten: #252525;
     --accent: #B983F8;
     --accent-fade: rgba(186, 131, 248, 0.4);
     --accent-two: #020607;    
