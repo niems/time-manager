@@ -153,6 +153,18 @@
     background: var(--task-options-bg);
 }
 
+/* TASK ADD/REFRESH SETUP */
+@keyframes refresh-enter-anim {
+    from {
+        margin-top: 50px;
+        opacity: 0.2;
+    }
+
+    to {
+        
+    }
+}
+
 .task-option-refresh-container {
     box-sizing: border-box;
     min-width: 45px;
@@ -160,11 +172,18 @@
     min-height: 110px;
     max-height: 110px;
 
+    /* 1
     position: relative;
     right: -40%;
     top: -65px;
     padding: 5px 2px;
+    */
 
+    position: absolute;
+    bottom: 50%;
+    right: 0%;
+
+    
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
@@ -175,26 +194,19 @@
     border-width: 0px;
     border-color: var(--accent);
 
-    background: inherit; 
+    background: inherit;
+    background: red;
 }
 
 .task-option-refresh-container.display {
     border-width: 2px;
 }
 
-@keyframes refresh-enter-anim {
-    from {
-        top: 50%;
-        opacity: 0.2;
-    }
-
-    to {
-        
-    }
+.task-option-refresh-container.no-selection {
+    justify-content: flex-end;
 }
 
 .task-refresh {
-    display: none;
     width: max-content;
     height: max-content;
 
@@ -202,9 +214,12 @@
     border-radius: 10px;
     outline: none;
 
+    opacity: 0;
+    /* 1
     position: absolute;
     top: 0%;
     left: 0%;
+    */
 
     border-style: solid;
     border-width: 1px;
@@ -212,12 +227,10 @@
 
     background-color: var(--task-options-button-bg);
     box-shadow: 0px 1px 3px black;
-
-    transition: all 0.4s;
 }
 
 .task-refresh.display {
-    display: block;
+    opacity: 1;
 
     animation-name: refresh-enter-anim;
     animation-duration: 0.6s;
@@ -244,17 +257,20 @@
 
 .task-quick-add {
     box-sizing: border-box;
-    width: max-content;
-    height: max-content;
+    min-width: max-content;
+    min-height: max-content;
     z-index: 1;
 
     margin: 5px;
     border-radius: 10px;
     outline: none;
 
+
+    /* 1
     position: absolute;
     bottom: 0%;
     left: 0%;
+    */
 
     border-style: solid;
     border-width: 1px;
@@ -266,14 +282,22 @@
     transition: all 0.4s;
 }
 
+.task-quick-add.no-selection {
+    position: absolute;
+    bottom: 50%;
+    right: 0%;
+}
+
 .task-quick-add:hover {
     transform: scale(1.1, 1.1);    
     background-color: var(--accent);
 }
+/*
 .task-quick-add.no-selection:hover {
     transform: scale(1.1, 1.1);
     background-color: var(--accent);
 }
+*/
 
 
 .task-quick-add-img {
@@ -316,3 +340,38 @@
 
     filter: invert(1);
 }
+/*END TASK ADD/REFRESH SETUP */
+
+
+/*TASK LOAD/SAVE FILE SETUP*/
+/*
+.task-file-options {
+    box-sizing: border-box;
+    min-width: 45px;
+    max-width: 45px;
+    min-height: 110px;
+    max-height: 110px;
+
+    
+    left: -40%;
+    top: -65px;
+    padding: 5px 2px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+
+    border-radius: 8px;
+    border-style: solid none;
+    border-width: 0px;
+    border-color: var(--accent);
+
+    background: red;
+}
+*/
+
+.task-file-options.display {
+    border-width: 2px;
+}
+/*END TASK LOAD/SAVE FILE SETUP*/
