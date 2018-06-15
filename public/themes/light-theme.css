@@ -1,13 +1,15 @@
 :root {
     --main: #b0bfda;
     --ten: rgb(37, 37, 37);
-    --accent: #8196BB;
+    --accent: #B983F8;
     --accent-two: #020607;    
     --accent-three: #365180;
     --sixth: #b7c5e0;
     --seventh:#abb8cc;
+    --eight: #dde3ff;
 
-    --text-fg: #090a0a;
+    --text-fg: #dde3ff;
+
 
     --scrollbar-track-bg: var(--ten);
     --scrollbar-thumb-bg: white;
@@ -34,10 +36,11 @@
 
     --task-duration-text: var(--text-fg);
 
+    --task-options-container-border: var(--accent);
     --task-options-bg: var(--main);
     --task-options-border: var(--seventh);
-    --task-options-button-bg: var(--main);
-    --task-options-button-hover-bg: var(--sixth);
+    --task-options-button-bg: var(--eight);
+    --task-options-button-hover-bg: var(--accent);
 
     --add-task-bg: var(--accent);
     --add-task-fg: var(--text-fg);

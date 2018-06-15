@@ -33,10 +33,11 @@
 
     --task-duration-text: var(--text-fg);
 
+    --task-options-container-border: var(--accent);
     --task-options-bg: var(--main);
     --task-options-border: var(--seventh);
-    --task-options-button-bg: var(--main);
-    --task-options-button-hover-bg: var(--sixth);
+    --task-options-button-bg: var(--text-fg);
+    --task-options-button-hover-bg: var(--accent);
 
     --add-task-bg: var(--main);
     --add-task-fg: var(--text-fg);

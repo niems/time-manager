@@ -43,13 +43,13 @@
     
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
 
     border-radius: 8px;
     border-style: solid none;
     border-width: 0px;
-    border-color: var(--accent);
+    border-color: var(--task-options-container-border);
 
     background: inherit;
 }
@@ -59,31 +59,34 @@
     /*BUTTON SETUP*/
 .task-option-button {
     box-sizing: border-box;
-    min-width: max-content;
-    min-height: max-content;
-    z-index: 1;
 
-    margin: 5px;
+    min-width: max-content;
+    max-width: max-content;
+    min-height: max-content;
+    max-height: max-content;
+
+    margin: 5px 0px;
     border-radius: 10px;
     outline: none;
 
     border-style: solid;
     border-width: 1px;
     
-    background: inherit;
+    background: var(--task-options-button-bg);
+
     border-color: var(--task-options-border);
     box-shadow: 0px 1px 3px black;
     
     transition: all 0.4s;
 }
     .task-option-button:hover {
-        background: var(--accent);
+        background: var(--task-options-button-hover-bg);
         transform: scale(1.1, 1.1);
     }
 
 .task-option-button-img {
-    width: 25px;
-    height: 25px;
+    min-width: 25px;
+    min-height: 25px;
 }
     /*END BUTTON SETUP*/
 
@@ -109,14 +112,25 @@
     #task-refresh-display {
         opacity: 1;
         animation-name: button-enter-anim;
-        animation-duration: 0.6s;
+        animation-duration: 0.5s;
     }
 
 #task-quick-add-no-selection {
     position: absolute;
     bottom: 50%;
     right: 0%;
+
+    margin: 0px 3px 5px 0px;
 }
+
+#task-quick-add {
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+
+    margin: 0px 3px 5px 0px;
+}
+
 /****************************************/
 /*END NEW ADD/REFRESH SETUP*/
 
@@ -134,7 +148,11 @@
     }
 
 #task-file-save-display {
-    z-index: 1;
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+
+    margin: 0px 0px 5px 3px;
 }
 
 #task-file-load {
@@ -143,182 +161,9 @@
     #task-file-load-display {
         opacity: 1;
         animation-name: button-enter-anim;
-        animation-duration: 0.6s;
+        animation-duration: 0.5s;
     }
 /****************************************/
 /*END NEW TASK LOAD/SAVE FILE SETUP*/
-
-/* TASK ADD/REFRESH SETUP */
-
-/*
-.task-option-refresh-container {
-    box-sizing: border-box;
-    min-width: 45px;
-    max-width: 45px;
-    min-height: 110px;
-    max-height: 110px;
-
-    position: absolute;
-    bottom: 50%;
-    right: 0%;
-
-    
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: space-between;
-    align-items: center;
-
-    border-radius: 8px;
-    border-style: solid none;
-    border-width: 0px;
-    border-color: var(--accent);
-
-    background: inherit;
-    background: red;
-}
-
-.task-option-refresh-container.display {
-    border-width: 2px;
-}
-
-.task-option-refresh-container.no-selection {
-    justify-content: flex-end;
-}
-
-.task-refresh {
-    width: max-content;
-    height: max-content;
-
-    margin: 5px;
-    border-radius: 10px;
-    outline: none;
-
-    opacity: 0;
-
-    border-style: solid;
-    border-width: 1px;
-    border-color: var(--task-options-border);
-
-    background-color: var(--task-options-button-bg);
-    box-shadow: 0px 1px 3px black;
-}
-
-.task-refresh.display {
-    opacity: 1;
-
-    animation-name: button-enter-anim;
-    animation-duration: 0.6s;
-}
-
-.task-refresh:hover {
-    background-color: var(--task-options-button-hover-bg);
-    transform: scale(1.1, 1.1);    
-}
-
-.task-refresh.display:hover {
-    background: var(--accent);
-    transform: scale(1.1, 1.1);    
-}
-
-.task-refresh-img {
-    width: 22px;
-    height: 25px;
-    filter: invert(1);
-}
-    .task-refresh-img.no-selection {
-        filter: invert(0);
-    }
-*/
-/*
-.task-quick-add {
-    box-sizing: border-box;
-    min-width: max-content;
-    min-height: max-content;
-    z-index: 1;
-
-    margin: 5px;
-    border-radius: 10px;
-    outline: none;
-
-    border-style: solid;
-    border-width: 1px;
-    
-    background: var(--task-options-button-bg);
-    border-color: var(--task-options-border);
-    box-shadow: 0px 1px 3px black;
-    
-    transition: all 0.4s;
-}
-
-.task-quick-add.no-selection {
-    position: absolute;
-    bottom: 50%;
-    right: 0%;
-}
-
-.task-quick-add:hover {
-    transform: scale(1.1, 1.1);    
-    background-color: var(--accent);
-}
-*/
-/*
-.task-quick-add.no-selection:hover {
-    transform: scale(1.1, 1.1);
-    background-color: var(--accent);
-}
-*/
-
-
-/*
-.task-quick-add-img {
-    width: 22px;
-    height: 25px;
-
-    filter: invert(1);
-}
-    .task-quick-add-img.no-selection {
-        filter: invert(0);
-    }
-
-.task-toggle-button {  
-    width: max-content;
-    height: max-content;
-    
-    overflow: hidden;
-    outline: none;
-    margin: 0px;
-
-    position: absolute;
-    
-    border-radius: 5px;
-    border-width: 1px;
-    border-color: var(--task-options-border);
-    background: var(--task-options-button-bg);
-    box-shadow: 0px 2px 5px black;
-    
-    transition: all 0.4s;
-}
-
-.task-toggle-button:hover {
-    background: var(--task-options-button-hover-bg);
-    transform: scale(1.1, 1.1);
-}
-
-.task-option-img {
-    width: 25px;
-    height: 25px;
-
-    filter: invert(1);
-}
-*/
-/*END TASK ADD/REFRESH SETUP */
-
-
-
-
-
-
-
-
 
 
