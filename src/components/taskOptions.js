@@ -118,7 +118,18 @@ class TaskOptions extends Component {
         let refreshButtonClass = this.state.displayTaskContainer ? 'task-refresh display' : 'task-refresh';
 
         let fileContainerClass = this.state.displayFileContainer ? 'task-file-options display' : 'task-file-options';
-        let loadButtonClass = this.state.displayFileContainer ? 'task-load display' : 'task-load';
+        let loadButtonClass = this.state.displayFileContainer ? 'task-file-load-button display' : 'task-file-load-button';
+
+        /**keep these only */
+        //GENERAL SETUP
+        let optionContainerClass = 'options-container'; //applies to both refresh & file containers
+        let taskButtonClass = 'task-option-button'; //applies to all task buttons
+        let taskButtonImgClass = 'task-option-button-img'; //applies to all task button images
+
+        //CONTAINER SPECIFIC SETUP
+        let refreshButtonId = this.state.displayTaskContainer ? 'task-refresh-display' : 'task-refresh';
+        let loadButtonId = this.state.displayFileContainer ? 'task-file-load-display' : 'task-file-load'; //replacement for loadButtonClass
+
 
         console.log(`render() refresh button classes: ${refreshButtonClass}`);
 
@@ -139,17 +150,27 @@ class TaskOptions extends Component {
 
             return (
                 <div id='task-options-container'>
-                    <button className='task-toggle-button' onClick={this.props.onToggle}>
-                        <img className='task-option-img' src={buttonImgSrc} alt='failed to load task play img' />
-                    </button>
-
-                    <div className ={refreshContainerClass} onMouseEnter={this.onTaskHover} onMouseLeave={this.onTaskHoverExit}>
-                        <button className={refreshButtonClass} onClick={this.props.onRestart}>
-                            <img className='task-refresh-img' src='./images/task-options/refresh.svg' alt='failed to load task refresh img' />
+                    <div id='file-container' className={optionContainerClass} onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
+                        <button id={loadButtonId} className={taskButtonClass}>
+                            <img className={taskButtonImgClass} src='./images/task-menu-options/load-file.svg' alt='failed to load "load" img' />
                         </button>
 
-                        <button className='task-quick-add' onClick={this.props.onToggleAddTask}>
-                            <img className='task-quick-add-img' src='./images/task-options/add.svg' alt='failed to load task quick add img' />
+                        <button id='task-file-save-display' className={taskButtonClass}>
+                            <img className={taskButtonImgClass} src='./images/task-menu-options/save-file.svg' alt='failed to load save img' />
+                        </button>
+                    </div>
+
+                    <button className={taskButtonClass} onClick={this.props.onToggle}>
+                        <img className={taskButtonImgClass} src={buttonImgSrc} alt='failed to load task play img' />
+                    </button>
+
+                    <div id='refresh-container' className={optionContainerClass} onMouseEnter={this.onTaskHover} onMouseLeave={this.onTaskHoverExit}>
+                        <button id={refreshButtonId} className={taskButtonClass} onClick={this.props.onRestart}>
+                            <img className={taskButtonImgClass} src='./images/task-options/refresh.svg' alt='failed to load task refresh img' />
+                        </button>
+
+                        <button id='task-quick-add' className={taskButtonClass} onClick={this.props.onToggleAddTask}>
+                            <img className={taskButtonImgClass} src='./images/task-options/add.svg' alt='failed to load task quick add img' />
                         </button>
                     </div>
                 </div>
@@ -159,13 +180,19 @@ class TaskOptions extends Component {
         console.log('render() task state is NOT defined');
         //runs if no task is selected
         return (
-            <div id='task-options-container' onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
-                <div className={fileContainerClass}>
+            <div id='task-options-container'>
+                <div id='file-container' className={optionContainerClass} onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
+                    <button id={loadButtonId} className={taskButtonClass}>
+                        <img className={taskButtonImgClass} src='./images/task-menu-options/load-file.svg' alt='failed to load "load" img' />
+                    </button>
 
+                    <button id='task-file-save-display' className={taskButtonClass}>
+                        <img className={taskButtonImgClass} src='./images/task-menu-options/save-file.svg' alt='failed to load save img' />
+                    </button>
                 </div>
 
-                <button className='task-quick-add no-selection' onClick={this.props.onToggleAddTask}>
-                    <img className='task-quick-add-img no-selection' src='./images/task-options/add.svg' alt='failed to load task quick add img' />
+                <button id='task-quick-add-no-selection' className={taskButtonClass} onClick={this.props.onToggleAddTask}>
+                    <img className={taskButtonImgClass} src='./images/task-options/add.svg' alt='failed to load task quick add img' />
                 </button>
             </div>
         );
@@ -173,17 +200,14 @@ class TaskOptions extends Component {
 }
 
 /**
- * 
-<div id='task-options-container'>
-                <button className='task-quick-add no-selection' onClick={this.props.onToggleAddTask}>
-                    <img className='task-quick-add-img no-selection' src='./images/task-options/add.svg' alt='failed to load task quick add img' />
-                </button>
+<div className={fileContainerClass} onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
+                    <button className={loadButtonClass}>
+                        <img className='task-file-load-img' src='./images/task-menu-options/load-file.svg' alt='failed to load "load" img' />
+                    </button>
 
-                <div id={refreshContainerClass}>
-                    <button className='task-refresh no-selection' onClick={this.props.onRestart}>
-                        <img className='task-refresh-img no-selection' src='./images/task-options/refresh.svg' alt='failed to load task refresh img' />
+                    <button className='task-file-save-button'>
+                        <img className='task-file-save-img' src='./images/task-menu-options/save-file.svg' alt='failed to load save img' />
                     </button>
                 </div>
-            </div>
 */
 export default TaskOptions;
