@@ -4,38 +4,45 @@ import ShowAllTasks from './showAllTasks';
 import ColorThemeOptions from './colorThemeOptions';
 import './style/taskMenu.css';
 
-function TaskMenuOptions({ selectedOption, onOptionSelect }) {
+//accent color of selection option is based on current theme
+function themeMod(themeId) {
+    console.log(`theme id: ${themeId}`);
+    let optionClass = '';
+
+    switch( themeId ) {
+        case 'dark-theme':
+            optionClass = ' selected dark';
+            break;
+        
+        case 'light-theme':
+            optionClass = ' selected light';
+            break;
+    }
+
+    return optionClass;
+}
+
+function TaskMenuOptions({ themeId, selectedOption, onOptionSelect }) {
     let taskListClasses = 'task-option-img-container';
     let taskListImgClasses = 'task-menu-option-img';
 
     let colorThemeClasses = 'task-option-img-container';
     let colorThemeImgClasses = 'task-menu-option-img';
 
-    let loadFileClasses = 'task-option-img-container';
-    let loadFileImgClasses='task-menu-option-img';
-
-    let saveFileClasses = 'task-option-img-container';
-    let saveFileImgClasses = 'task-menu-option-img';
-
     if ( selectedOption === 'task-list-option' ) {
         taskListClasses += ' selected';
-        taskListImgClasses += ' selected';
+        //taskListImgClasses += ' selected';
+        taskListImgClasses += themeMod( themeId );
     } 
 
     else if ( selectedOption === 'color-theme-option' ) {
         colorThemeClasses += ' selected';
-        colorThemeImgClasses += ' selected';
+        //colorThemeImgClasses += ' selected';
+        colorThemeImgClasses += themeMod( themeId );
     }
 
-    else if ( selectedOption === 'load-file-option' ) {
-        loadFileClasses += ' selected';
-        loadFileImgClasses += ' selected';
-    }
-
-    else if ( selectedOption === 'save-file-option' ) {
-        saveFileClasses += ' selected';
-        saveFileImgClasses += ' selected';
-    }
+    console.log(`\n\nTaskMenuOptions() taskListImgClass: ${taskListImgClasses}`);
+    console.log(`TaskMenuOptions() colorThemeImgClasses: ${colorThemeImgClasses}\n\n`);
 
     return (
         <div id='task-menu-options-container'>
@@ -62,24 +69,6 @@ function DisplayMenuSelection({ selected, allTasks, onTaskSelect, onThemeSelect,
             <ColorThemeOptions onSelect={onThemeSelect} />
         );
     }
-
-    /*
-    else if ( selected === 'load-file-option' ) {
-        return (
-            <FileMenu load={true}/>
-        );
-    }
-
-    else if ( selected === 'save-file-option' ) {
-        console.log('save file option not coded D:');
-
-        onSave();
-        
-        return (
-            null
-        );
-    }
-    */
 
     return null;
 }
@@ -115,7 +104,7 @@ class TaskMenu extends Component {
     render() {
         return (
             <div id='task-menu-container'>
-                <TaskMenuOptions selectedOption={this.state.selectedOption} onOptionSelect={this.onOptionSelect} />
+                <TaskMenuOptions themeId={this.props.themeId} selectedOption={this.state.selectedOption} onOptionSelect={this.onOptionSelect} />
                 
                 <DisplayMenuSelection selected={this.state.selectedOption} allTasks={this.props.allTasks}
                                       onTaskSelect={this.props.onTaskSelect} onThemeSelect={this.props.onThemeSelect} 

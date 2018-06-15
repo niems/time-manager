@@ -210,7 +210,8 @@ class TaskView extends Component {
                     <DisplayTitle name={this.props.task.name} total={this.props.task.totalDuration} />
                     <TaskArcDisplay theme={this.props.theme} hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} />
                     <TaskDuration hr={this.state.elapsedHr} min={this.state.elapsedMin} sec={this.state.elapsedSec} total={this.props.task.totalDuration} />
-                    <TaskOptions taskState={this.state.taskState} onToggle={this.onToggleTaskState} onRestart={this.onRestartTask} onToggleAddTask={this.props.onToggleAddTask} />
+                    <TaskOptions taskState={this.state.taskState} onToggle={this.onToggleTaskState} onRestart={this.onRestartTask}
+                                 onToggleAddTask={this.props.onToggleAddTask} onSave={this.props.onSave} onLoad={this.props.onLoad} />
                 </div>
             );
         }
@@ -220,7 +221,7 @@ class TaskView extends Component {
             <div id='taskView'>
                 <DisplayTitle />
                 <NoSelection />
-                <TaskOptions onToggleAddTask={this.props.onToggleAddTask} />
+                <TaskOptions onToggleAddTask={this.props.onToggleAddTask} onSave={this.props.onSave} onLoad={this.props.onLoad} />
             </div>
         );
     }

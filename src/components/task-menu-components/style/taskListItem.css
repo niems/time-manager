@@ -19,7 +19,7 @@
     
     background: var(--task-menu-item-bg);
     border-color: var(--task-menu-item-border);
-    color: var(--ten);
+    color: var(--task-menu-item-fg);
     box-shadow: -2px 2px 4px black;
 
     opacity: 0.5;

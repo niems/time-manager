@@ -23,13 +23,20 @@
 
     margin: 0px 5px;
 
-    filter: invert(1);
     transition: transform 0.3s;
 }
+    .titlebar-icon.dark {
+        filter: invert(1);
+    }
 
-#titlebar-menu:hover {
+#titlebar-menu-dark:hover {
     transform: scale(1.2, 1.2);
     filter: invert(1) sepia(1) saturate(500) hue-rotate(120deg);    
+}
+
+#titlebar-menu-light:hover {
+    transform: scale(1.2, 1.2);
+    filter: invert(0.5) sepia(1) saturate(500) hue-rotate(285deg); 
 }
 
 #titlebar-close:hover {

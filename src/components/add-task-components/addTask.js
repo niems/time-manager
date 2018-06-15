@@ -2,10 +2,11 @@ import React from 'react';
 import TaskInput from './taskInput';
 import './style/addTask.css';
 
-const AddTask = ({ onClose, createTask }) => {
+const AddTask = ({ themeId, onClose, createTask }) => {
+
     return (
         <div id='add-task-container'>
-            <TaskInput onClose={onClose} createTask={createTask} />
+            <TaskInput themeId={themeId} onClose={onClose} createTask={createTask} />
         </div>
     );
 }

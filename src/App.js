@@ -23,21 +23,21 @@ function isElectron() {
   
 const isElectronRunning = isElectron();
 
-function DisplayMenu({ displayMenu, allTasks, onTaskSelect, onThemeSelect, removeTask, onSave }) {
+function DisplayMenu({ displayMenu, allTasks, onTaskSelect, themeId, onThemeSelect, removeTask, onSave }) {
   if ( displayMenu ) { //if the menu should be displayed
     return (
-      <TaskMenu allTasks={allTasks} onTaskSelect={onTaskSelect} onThemeSelect={onThemeSelect}
-                removeTask={removeTask} onSave={onSave} />
+      <TaskMenu allTasks={allTasks} onTaskSelect={onTaskSelect} themeId={themeId} 
+                onThemeSelect={onThemeSelect} removeTask={removeTask} onSave={onSave} />
     );
   }
 
   return null;
 }
 
-function DisplayAddTask({ displayAddTask, onClose, createTask }) {
+function DisplayAddTask({ themeId, displayAddTask, onClose, createTask }) {
   if ( displayAddTask ) { //if the add task window should be displayed
     return (
-      <AddTask onClose={onClose} createTask={createTask} />
+      <AddTask themeId={themeId} onClose={onClose} createTask={createTask} />
     );
   }
 
@@ -251,7 +251,8 @@ class App extends Component {
   onSaveTasks() {
     console.log('onSaveTasks()');
 
-    let blob = new Blob([ JSON.stringify( this.state.allTasks ) ], {type: 'text/plain; charset=utf-8'});
+    //let blob = new Blob([ JSON.stringify( this.state.allTasks ) ], {type: 'text/plain; charset=utf-8'});
+    let blob = new Blob([ JSON.stringify( this.state.allTasks ) ], {type: 'application/json; charset=utf-8'});
         FileSaver.saveAs(blob, 'tasks.txt');
   }
 
@@ -373,17 +374,17 @@ class App extends Component {
     return (
         <div className='wrapper'>
             <link rel='stylesheet' href={this.state.theme.path} />
-            <Titlebar onMenu={this.onMenu} onClose={this.onClose} />
+            <Titlebar themeId={this.state.theme.id} onMenu={this.onMenu} onClose={this.onClose} />
 
             <DisplayMenu displayMenu={this.state.displayMenu} allTasks={this.state.allTasks} onTaskSelect={this.onTaskSelect}
-                         onThemeSelect={this.onColorThemeSelect} removeTask={this.removeTask} onSave={this.onSaveTasks} />
+                         themeId={this.state.theme.id} onThemeSelect={this.onColorThemeSelect} removeTask={this.removeTask} />
             
-            <DisplayAddTask displayAddTask={this.state.displayAddTask} onClose={this.onToggleAddTask} createTask={this.createNewTask} />
+            <DisplayAddTask themeId={this.state.theme.id} displayAddTask={this.state.displayAddTask} onClose={this.onToggleAddTask} createTask={this.createNewTask} />
             {this.state.displayAddTaskSuccess ? <DisplayAddTaskSuccess name={this.state.allTasks[0].name} /> : null}
             {this.state.displayAddTaskFail ? <DisplayAddTaskFail name={this.failedToAddTaskId} /> : null}
 
-            <TaskView task={this.state.selectedTask} allTasks={this.state.allTasks}
-                      theme={this.state.theme} onToggleAddTask={this.onToggleAddTask} />
+            <TaskView task={this.state.selectedTask} allTasks={this.state.allTasks} theme={this.state.theme}
+                      onToggleAddTask={this.onToggleAddTask} onSave={this.onSaveTasks} onLoad={this.onLoadTasks} />
         </div>
     );
   }

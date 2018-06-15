@@ -2,13 +2,14 @@
     --main: #b0bfda;
     --ten: rgb(37, 37, 37);
     --accent: #B983F8;
+    --accent-fade: rgba(186, 131, 248, 0.4);
     --accent-two: #020607;    
     --accent-three: #365180;
     --sixth: #b7c5e0;
     --seventh:#abb8cc;
     --eight: #dde3ff;
 
-    --text-fg: #dde3ff;
+    --text-fg: #1C1C1C;
 
 
     --scrollbar-track-bg: var(--ten);
@@ -23,9 +24,9 @@
     --task-menu-list-bg: inherit;
     --task-menu-list-border: var(--sixth);
     --task-menu-item-bg: var(--main);
-    --task-menu-item-fg: var(--accent-two);   
+    --task-menu-item-fg: var(--text-fg);   
     --task-menu-item-border: var(--sixth);
-    --task-menu-item-hover-fg: var(--accent-two);
+    --task-menu-item-hover-fg: var(--text-fg);
     
     --task-view-bg: var(--main);
 
@@ -37,15 +38,16 @@
     --task-duration-text: var(--text-fg);
 
     --task-options-container-border: var(--accent);
+    --task-options-container-hover-bg: var(--accent-fade);
     --task-options-bg: var(--main);
     --task-options-border: var(--seventh);
     --task-options-button-bg: var(--eight);
     --task-options-button-hover-bg: var(--accent);
 
-    --add-task-bg: var(--accent);
+    --add-task-bg: var(--sixth);
     --add-task-fg: var(--text-fg);
-    --add-task-inputfield-border: var(--accent-three);
-    --add-task-duration-separator: var(--accent-three);
+    --add-task-inputfield-border: var(--accent);
+    --add-task-duration-separator: var(--accent);
 
     --add-task-success-text: var(--text-fg);
     --add-task-success-bg: var(--main);

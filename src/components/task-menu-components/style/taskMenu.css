@@ -91,6 +91,24 @@
     filter: invert(1);
     transition: transform 0.4s;
 }
-    .task-menu-option-img.selected {
+    .task-menu-option-img.selected.dark {
+        box-sizing: border-box;
+        min-width: 30px;
+        max-width: 30px;
+        min-height: 30px;
+        max-height: 30px;
+
+        transition: transform 0.4s;
         filter: invert(1) sepia(1) saturate(500) hue-rotate(120deg);    
+    }
+
+    .task-menu-option-img.selected.light {
+        box-sizing: border-box;
+        min-width: 30px;
+        max-width: 30px;
+        min-height: 30px;
+        max-height: 30px;
+
+        transition: transform 0.4s;
+        filter: invert(0.5) sepia(1) saturate(500) hue-rotate(285deg); 
     }

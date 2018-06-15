@@ -149,7 +149,7 @@ class TaskInput extends Component {
     render() {
         return (
             <div id='task-input-container'>
-                <img id='task-input-close-img' src='./images/titlebar-icons/close.svg' alt='failed to load task close img' onClick={this.props.onClose} />
+                <img id={'close-img-' + this.props.themeId} className='task-input-close-img' src='./images/titlebar-icons/close.svg' alt='failed to load task close img' onClick={this.props.onClose} />
                 <TaskNameInput name={this.state.name} onChange={this.onNameChange} onSubmit={this.onSubmit} nameRef={this.setNameRef} />
                 <TaskDurationInput hr={this.state.hr} min={this.state.min} sec={this.state.sec} onChange={this.onDurationChange} onSubmit={this.onSubmit} 
                                    hrRef={this.setHrRef} minRef={this.setMinRef} secRef={this.setSecRef} />
