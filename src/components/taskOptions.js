@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import LoadFileDialog  from './loadFileDialog';
 import './style/taskOptions.css';
 
 class TaskOptions extends Component {
@@ -8,6 +9,8 @@ class TaskOptions extends Component {
         this.state = {
             displayTaskContainer: false, //displays the container holding the add task & refresh buttons
             displayFileContainer: false, //displays the container holding the file save & load buttons
+
+            displayLoadDialog: false, //
         };
 
         this.onTaskHover = this.onTaskHover.bind(this); //called when the mouse enters the display task container
@@ -16,12 +19,15 @@ class TaskOptions extends Component {
         this.onFileHover = this.onFileHover.bind(this); //called when the mouse enters the display file container
         this.onFileHoverExit = this.onFileHoverExit.bind(this); //called when the mouse exits the display file container
         
-        this.onLoad = this.onLoad.bind(this);  //called when the load file button is clicked - user chooses file to load, then passes back to app.js to store data
+        //this.onLoad = this.onLoad.bind(this);  //called when the load file button is clicked - user chooses file to load, then passes back to app.js to store data
+        this.onToggleLoadDialog = this.onToggleLoadDialog.bind(this); //toggles if the load dialog is currently displayed
 
+        /*
         this.loadRef = undefined; //stores the reference for the load file button
         this.setLoadRef = element => {
             this.loadRef = element;
         }
+        */
     }
 
     //mouse entered hovering over display task container
@@ -60,22 +66,10 @@ class TaskOptions extends Component {
         }
     }
 
-    onLoad(e) {
+    onToggleLoadDialog(e) {
         e.preventDefault();
 
-        if ( this.loadRef ) { //reference for load button exists
-            console.log('onLoad() ref exists');
-
-            /*
-            let reader = new FileReader();
-
-            reader.onload = (e) => {
-                console.log(`onLoad() reader results: ${reader.result}`);
-            }
-
-            reader.readAsText()
-            */
-        }
+        this.setState({ displayLoadDialog: !this.state.displayLoadDialog });
     }
 
     render() {
@@ -95,8 +89,10 @@ class TaskOptions extends Component {
 
             return (
                 <div id='task-options-container'>
+                    {this.state.displayLoadDialog ? <LoadFileDialog /> : null }
+
                     <div id='file-container' className={optionContainerClass} onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
-                        <button id={loadButtonId} className={taskButtonClass} onClick={this.onLoad} ref={this.setLoadRef}>
+                        <button id={loadButtonId} className={taskButtonClass} onClick={this.onToggleLoadDialog}>
                             <img className={taskButtonImgClass} src='./images/task-menu-options/load-file.svg' alt='failed to load "load" img' />
                         </button>
 
@@ -126,8 +122,10 @@ class TaskOptions extends Component {
         //runs if no task is selected
         return (
             <div id='task-options-container'>
+                {this.state.displayLoadDialog ? <LoadFileDialog /> : null }
+
                 <div id='file-container' className={optionContainerClass} onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
-                    <button id={loadButtonId} className={taskButtonClass} onClick={this.onLoad} ref={this.setLoadRef}>
+                    <button id={loadButtonId} className={taskButtonClass} onClick={this.onToggleLoadDialog}>
                         <img className={taskButtonImgClass} src='./images/task-menu-options/load-file.svg' alt='failed to load "load" img' />
                     </button>
 

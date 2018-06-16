@@ -1,0 +1,11 @@
+#load-file-dialog-container {
+    position: absolute;
+    top: -300%;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+
+    background: green;
+}
