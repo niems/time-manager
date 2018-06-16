@@ -85,32 +85,15 @@ class App extends Component {
           selectedTask: undefined,
 
         allTasks: [
+          /*
           {
             name: 'code',
             completedDuration: {
               hr: 0,
               min: 0,
               sec: 0
-            },
-            totalDuration: {
-                hr: 2,
-                min: 5,
-                sec: 30
             }
-          },
-          {
-            name: 'read',
-            completedDuration: {
-              hr: 0,
-              min: 0,
-              sec: 0
-            },
-            totalDuration: {
-                hr: 1,
-                min: 30,
-                sec: 0
-            }
-          }         
+            */         
         ]
       };
 
@@ -120,7 +103,7 @@ class App extends Component {
       this.removeTask = this.removeTask.bind(this); //removes selected task from task menu
 
       this.onSaveTasks = this.onSaveTasks.bind(this); //saves all tasks as a JSON object to a text file
-      this.onLoadTasks = this.onLoadTasks.bind(this); //loads tasks from user selected file
+      this.onLoadTasks = this.onLoadTasks.bind(this); //loads tasks from JSON object - read from file selection in loadFileDialog
 
       this.onTaskSelect = this.onTaskSelect.bind(this); //selects the clicked task in the menu
       this.onColorThemeSelect = this.onColorThemeSelect.bind(this); //selects the clicked color theme in the task menu
@@ -249,22 +232,24 @@ class App extends Component {
   }
 
   onSaveTasks() {
-    console.log('onSaveTasks()');
+    console.log(`onSaveTasks() data saving: ${this.state.allTasks}\n`);
+    console.log(`onSaveTasks() data saving stringified: ${ JSON.stringify(this.state.allTasks) }\n`);
+
 
     //let blob = new Blob([ JSON.stringify( this.state.allTasks ) ], {type: 'text/plain; charset=utf-8'});
-    let blob = new Blob([ JSON.stringify( this.state.allTasks ) ], {type: 'application/json; charset=utf-8'});
+    let blob = new Blob([ JSON.stringify( this.state.allTasks ) ], {type: 'text/plain; charset=utf-8'});
         FileSaver.saveAs(blob, 'tasks.txt');
   }
 
-  onLoadTasks(file) {
-    console.log('onLoadTasks()');
+  onLoadTasks(data) {
+    console.log(`\nonLoadTasks() data: ${data}`);
 
-    let reader = new FileReader();
+    this.setState({
+      selectedTask: data[0],
+      allTasks: data
+    });
 
-    reader.onload = (e) => {
-      console.log(`onLoadTasks() data loaded: ${reader.result}`);
-      
-    }
+    //popup confirmation window if tasks are successfully loaded
   }
 
   onTaskSelect(e) {

@@ -10,7 +10,7 @@ class TaskOptions extends Component {
             displayTaskContainer: false, //displays the container holding the add task & refresh buttons
             displayFileContainer: false, //displays the container holding the file save & load buttons
 
-            displayLoadDialog: false, //
+            displayLoadDialog: false, //toggles displaying the load file dialog window
         };
 
         this.onTaskHover = this.onTaskHover.bind(this); //called when the mouse enters the display task container
@@ -21,13 +21,6 @@ class TaskOptions extends Component {
         
         //this.onLoad = this.onLoad.bind(this);  //called when the load file button is clicked - user chooses file to load, then passes back to app.js to store data
         this.onToggleLoadDialog = this.onToggleLoadDialog.bind(this); //toggles if the load dialog is currently displayed
-
-        /*
-        this.loadRef = undefined; //stores the reference for the load file button
-        this.setLoadRef = element => {
-            this.loadRef = element;
-        }
-        */
     }
 
     //mouse entered hovering over display task container
@@ -66,8 +59,10 @@ class TaskOptions extends Component {
         }
     }
 
-    onToggleLoadDialog(e) {
-        e.preventDefault();
+    onToggleLoadDialog(e = undefined) {
+        if ( e ) {
+            e.preventDefault();
+        }
 
         this.setState({ displayLoadDialog: !this.state.displayLoadDialog });
     }
@@ -84,12 +79,11 @@ class TaskOptions extends Component {
 
         
         if ( this.props.taskState ) { //if task state is defined - undefined means no task is selected
-            //console.log('render() task state is defined');
             let buttonImgSrc = ( this.props.taskState === 'play' ) ? './images/task-options/pause.svg' : './images/task-options/play.svg';
 
             return (
                 <div id='task-options-container'>
-                    {this.state.displayLoadDialog ? <LoadFileDialog /> : null }
+                    {this.state.displayLoadDialog ? <LoadFileDialog onLoad={this.props.onLoad} onClose={this.onToggleLoadDialog} /> : null }
 
                     <div id='file-container' className={optionContainerClass} onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
                         <button id={loadButtonId} className={taskButtonClass} onClick={this.onToggleLoadDialog}>
@@ -118,11 +112,10 @@ class TaskOptions extends Component {
             );
         }
 
-        //console.log('render() task state is NOT defined');
         //runs if no task is selected
         return (
             <div id='task-options-container'>
-                {this.state.displayLoadDialog ? <LoadFileDialog /> : null }
+                {this.state.displayLoadDialog ? <LoadFileDialog onLoad={this.props.onLoad} onClose={this.onToggleLoadDialog} /> : null }
 
                 <div id='file-container' className={optionContainerClass} onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
                     <button id={loadButtonId} className={taskButtonClass} onClick={this.onToggleLoadDialog}>

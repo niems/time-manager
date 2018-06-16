@@ -1,11 +1,74 @@
 #load-file-dialog-container {
     position: absolute;
-    top: -300%;
+    top: -260px;
+    width: 80%;
+    height: 120px;
+
+    border-radius: 10px;
 
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 
-    background: green;
+    background: var(--add-task-bg);
+    box-shadow: 2px 2px 5px black;   
+}
+
+#load-file-close {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    filter: invert(0);
+    transition: transform 0.3s;
+}
+    #load-file-close:hover {
+        transform: scale(1.2, 1.2);
+        filter: invert(.5) sepia(1) saturate(100);
+    }
+
+#load-file-title {
+    margin: 0px;
+
+    font-variant: small-caps;
+    color: var(--text-fg);
+}
+
+#load-file-name {
+    font-variant: normal;
+    font-size: 0.9em;
+    color: var(--accent);
+}
+
+#load-file-select {
+    box-sizing: border-box;
+    min-width: max-content;
+    min-height: max-content;
+
+    font-variant: small-caps;
+    font-size: 0.8em;
+    padding: 5px 10px;
+    outline: none;
+
+    border-radius: 3px;
+    border-style: solid;
+    border-width: 1px;
+    
+    border-color: var(--accent);
+    background: inherit;
+    color: var(--text-fg);
+
+    transition: all 0.3s;
+}
+    #load-file-select:hover {
+        font-weight: bold;
+
+        background: var(--accent);
+        color: var(--add-task-bg);
+        transform: scale(1.1, 1.1);
+    }
+
+/**only used for file api */
+#load-file-input {
+    display: none;
 }
