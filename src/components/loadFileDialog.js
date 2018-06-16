@@ -70,7 +70,6 @@ class LoadFileDialog extends Component {
                     
                     if ( testFileFormatting( results ) ) { //tests formatting of file before updating allTasks state
                         this.props.onLoad( results ); //updates allTasks to loaded tasks
-                        this.props.onClose(); //closes load file window
                     }
                 }
                 catch(err) {
@@ -106,7 +105,12 @@ class LoadFileDialog extends Component {
         return (
             <div id='load-file-dialog-container'>
                 <img id='load-file-close' src='./images/titlebar-icons/close.svg' alt='load file close unable to load' onClick={this.props.onClose} />
-                <h4 id='load-file-title'>Load file: <span id='load-file-name'>{this.state.filename}</span></h4>
+                
+                <div id='load-file-info'>
+                    <h4 id='load-file-title'>Load file:</h4>
+                    <span id='load-file-name'>{this.state.filename}</span>
+                </div>
+
                 <button id='load-file-select' onClick={this.onFileSelect}>select file</button>
 
                 <input id='load-file-input' type='file' ref={this.setLoadRef} onChange={this.onFileChange} />

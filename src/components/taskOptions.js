@@ -19,8 +19,8 @@ class TaskOptions extends Component {
         this.onFileHover = this.onFileHover.bind(this); //called when the mouse enters the display file container
         this.onFileHoverExit = this.onFileHoverExit.bind(this); //called when the mouse exits the display file container
         
-        //this.onLoad = this.onLoad.bind(this);  //called when the load file button is clicked - user chooses file to load, then passes back to app.js to store data
         this.onToggleLoadDialog = this.onToggleLoadDialog.bind(this); //toggles if the load dialog is currently displayed
+        this.updateLoadedTasks = this.updateLoadedTasks.bind(this); //called when file data is loaded & data format is verified
     }
 
     //mouse entered hovering over display task container
@@ -67,6 +67,14 @@ class TaskOptions extends Component {
         this.setState({ displayLoadDialog: !this.state.displayLoadDialog });
     }
 
+    //closes load file window & passes verified loaded data to update allTasks state
+    updateLoadedTasks(data) {
+        console.log('updateLoadedTasks()');
+
+        this.setState({ displayLoadDialog: false });
+        this.props.onLoad( data ); 
+    }
+
     render() {
         //GENERAL SETUP
         let optionContainerClass = 'options-container'; //applies to both refresh & file containers
@@ -83,7 +91,7 @@ class TaskOptions extends Component {
 
             return (
                 <div id='task-options-container'>
-                    {this.state.displayLoadDialog ? <LoadFileDialog onLoad={this.props.onLoad} onClose={this.onToggleLoadDialog} /> : null }
+                    {this.state.displayLoadDialog ? <LoadFileDialog onLoad={this.updateLoadedTasks} onClose={this.onToggleLoadDialog} /> : null }
 
                     <div id='file-container' className={optionContainerClass} onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
                         <button id={loadButtonId} className={taskButtonClass} onClick={this.onToggleLoadDialog}>
@@ -115,7 +123,7 @@ class TaskOptions extends Component {
         //runs if no task is selected
         return (
             <div id='task-options-container'>
-                {this.state.displayLoadDialog ? <LoadFileDialog onLoad={this.props.onLoad} onClose={this.onToggleLoadDialog} /> : null }
+                {this.state.displayLoadDialog ? <LoadFileDialog onLoad={this.updateLoadedTasks} onClose={this.onToggleLoadDialog} /> : null }
 
                 <div id='file-container' className={optionContainerClass} onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
                     <button id={loadButtonId} className={taskButtonClass} onClick={this.onToggleLoadDialog}>
