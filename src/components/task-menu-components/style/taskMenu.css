@@ -75,7 +75,13 @@
     align-items: center;
 
     opacity: 0.6;
+
+    transition: all 0.4s;
 }
+
+    .task-option-img-container:hover {
+        transform: scale(1.2, 1.2);
+    }
     .task-option-img-container.selected {
         opacity: 0.75;
     }

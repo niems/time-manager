@@ -27,6 +27,12 @@
     flex: 1 auto;
 
     margin: 5px 0px;
+
+    transition: all 0.5s;
+}
+
+.color-theme-option:hover {
+    transform: scale(1.1, 1.1);
 }
 
 #light-theme {

@@ -1,6 +1,30 @@
 import React, {Component} from 'react';
 import './style/taskInput.css';
 
+
+function formatUserInput(hr, min, sec) {
+    let upperLimit = 60; //0 - 59 sec/min
+
+    sec = Number.parseInt( sec );
+    min = Number.parseInt( min );
+    hr = Number.parseInt( hr );
+
+    let newSec = sec % upperLimit; //total number of the seconds 
+    let newMin = min + ( Math.floor(sec / upperLimit) ); //total number of minutes before %
+    let newHr = hr + Math.floor( newMin / upperLimit );
+    newMin = newMin % upperLimit;
+
+    console.log(`\n\nformatUserInput() hr: ${newHr} min: ${newMin} sec: ${newSec}\n\n`);  
+
+    return (
+        {
+            hr: newHr,
+            min: newMin,
+            sec: newSec
+        }
+    );
+}
+
 function TaskNameInput({ name, onChange, onSubmit, nameRef }) {
     return (
         <form id='task-name-form' onSubmit={onSubmit}>
@@ -88,11 +112,13 @@ class TaskInput extends Component {
 
         else {
             console.log('valueCheck(): values valid - adding task now');
+            let format = formatUserInput( this.state.hr, this.state.min, this.state.sec ); //puts user input into correct format before adding
+
             this.props.createTask({
                 name: this.state.name,
-                hr: this.state.hr,
-                min: this.state.min,
-                sec: this.state.sec
+                hr: format.hr,
+                min: format.min,
+                sec: format.sec
             });  
 
             this.props.onClose();

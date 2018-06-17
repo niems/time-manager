@@ -31,13 +31,11 @@ function TaskMenuOptions({ themeId, selectedOption, onOptionSelect }) {
 
     if ( selectedOption === 'task-list-option' ) {
         taskListClasses += ' selected';
-        //taskListImgClasses += ' selected';
         taskListImgClasses += themeMod( themeId );
     } 
 
     else if ( selectedOption === 'color-theme-option' ) {
         colorThemeClasses += ' selected';
-        //colorThemeImgClasses += ' selected';
         colorThemeImgClasses += themeMod( themeId );
     }
 
