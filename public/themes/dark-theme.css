@@ -56,4 +56,13 @@
     --no-selection-bg: var(--main);    
     --no-selection-add-button-bg: var(--accent);
     --no-selection-add-button-border: var(--accent);    
+
+    --load-file-bg: var(--main);
+    --load-file-title-fg: var(--text-fg);
+    --load-file-name-fg: var(--accent);
+    --load-file-button-border: var(--accent);
+    --load-file-button-bg: inherit;
+    --load-file-button-fg: var(--text-fg);
+    --load-file-button-hover-bg: var(--accent);
+    --load-file-button-hover-fg: var(--main);
 }
