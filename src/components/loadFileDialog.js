@@ -1,9 +1,24 @@
 import React, {Component} from 'react';
 import './style/loadFileDialog.css';
 
+//given the initial id name/names, adds and returns the theme
+function addTheme(classes, theme) {
+    switch( theme ) {
+        case 'dark-theme':
+            classes += ' dark-theme';
+            break;
+
+        case 'light-theme':
+            classes += ' light-theme';
+            break;
+    }
+
+    return classes;
+}
+
 //checks the formatting of the data from the loaded file
 //returns true if formatting is correct, false otherwise
-function testFileFormatting(data) {
+function isFileFormatValid(data) {
     try {
         //determines if the format of each object in the file is valid
         let isFormatInvalid = data.filter( item => 
@@ -16,17 +31,17 @@ function testFileFormatting(data) {
                                            !item.totalDuration.sec
                                         );
     
-        console.log(`testFileFormatting() invalid count: ${isFormatInvalid.length}`);
+        console.log(`isFileFormatValid() invalid count: ${isFormatInvalid.length}`);
         if ( isFormatInvalid.length > 0 ) { //format is invalid at at least once
-            console.log('testFileFormatting(): loaded file is INVALID');
+            console.log('isFileFormatValid(): loaded file is INVALID');
             return false;
         }
     
-        console.log('testFileFormatting(): loaded file is VALID  :D');
+        console.log('isFileFormatValid(): loaded file is VALID  :D');
         return true; //format is valid
     }
     catch(err) {
-        console.log(`ERR testFileFormatting(): ${err.message}`);
+        console.log(`ERR isFileFormatValid(): ${err.message}`);
         return false;
     }
 }
@@ -68,7 +83,7 @@ class LoadFileDialog extends Component {
                     console.log(`file data: ${results}`);
                     console.log(`file data JSON: ${ JSON.stringify(results) }\n\n`);
                     
-                    if ( testFileFormatting( results ) ) { //tests formatting of file before updating allTasks state
+                    if ( isFileFormatValid( results ) ) { //tests formatting of file before updating allTasks state
                         this.props.onLoad( results ); //updates allTasks to loaded tasks
                     }
                 }
@@ -102,9 +117,12 @@ class LoadFileDialog extends Component {
     }
 
     render() {
+        let fileCloseClasses = addTheme('load-file-close', this.props.themeId);
+        console.log(`file close: ${fileCloseClasses}`);
+
         return (
             <div id='load-file-dialog-container'>
-                <img id='load-file-close' src='./images/titlebar-icons/close.svg' alt='load file close unable to load' onClick={this.props.onClose} />
+                <img className={fileCloseClasses} src='./images/titlebar-icons/close.svg' alt='load file close unable to load' onClick={this.props.onClose} />
                 
                 <div id='load-file-info'>
                     <h4 id='load-file-title'>Load file:</h4>

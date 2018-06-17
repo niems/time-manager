@@ -91,7 +91,7 @@ class TaskOptions extends Component {
 
             return (
                 <div id='task-options-container'>
-                    {this.state.displayLoadDialog ? <LoadFileDialog onLoad={this.updateLoadedTasks} onClose={this.onToggleLoadDialog} /> : null }
+                    {this.state.displayLoadDialog ? <LoadFileDialog themeId={this.props.themeId} onLoad={this.updateLoadedTasks} onClose={this.onToggleLoadDialog} /> : null }
 
                     <div id='file-container' className={optionContainerClass} onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
                         <button id={loadButtonId} className={taskButtonClass} onClick={this.onToggleLoadDialog}>
@@ -123,7 +123,7 @@ class TaskOptions extends Component {
         //runs if no task is selected
         return (
             <div id='task-options-container'>
-                {this.state.displayLoadDialog ? <LoadFileDialog onLoad={this.updateLoadedTasks} onClose={this.onToggleLoadDialog} /> : null }
+                {this.state.displayLoadDialog ? <LoadFileDialog themeId={this.props.themeId} onLoad={this.updateLoadedTasks} onClose={this.onToggleLoadDialog} /> : null }
 
                 <div id='file-container' className={optionContainerClass} onMouseEnter={this.onFileHover} onMouseLeave={this.onFileHoverExit}>
                     <button id={loadButtonId} className={taskButtonClass} onClick={this.onToggleLoadDialog}>
