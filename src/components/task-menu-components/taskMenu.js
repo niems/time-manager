@@ -101,7 +101,7 @@ class TaskMenu extends Component {
 
     render() {
         return (
-            <div id='task-menu-container'>
+            <div id={this.props.taskMenuClass}>
                 <TaskMenuOptions themeId={this.props.themeId} selectedOption={this.state.selectedOption} onOptionSelect={this.onOptionSelect} />
                 
                 <DisplayMenuSelection selected={this.state.selectedOption} allTasks={this.props.allTasks}

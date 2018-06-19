@@ -1,7 +1,7 @@
 import React from 'react';
 import './style/titlebar.css';
 
-const Titlebar = ({ themeId, onMenu, onClose }) => {
+const Titlebar = ({ themeId, onMenuToggle, onClose }) => {
     let titlebarIconTheme = 'titlebar-icon';
     let menuId = 'titlebar-menu'; //determines accent color for the menu icon
 
@@ -20,10 +20,11 @@ const Titlebar = ({ themeId, onMenu, onClose }) => {
 
     return (
         <div className='titlebar-container'>
-            <img className={titlebarIconTheme} id={menuId} src='./images/titlebar-icons/menu.svg' alt='failed to load menu icon' onClick={onMenu} />
+            <img className={titlebarIconTheme} id={menuId} src='./images/titlebar-icons/menu.svg' alt='failed to load menu icon' onClick={onMenuToggle} />
             <img className={titlebarIconTheme} id='titlebar-close' src='./images/titlebar-icons/close.svg' alt='failed to load close icon' onClick={onClose} />
         </div>
     );
 }
+
 
 export default Titlebar;

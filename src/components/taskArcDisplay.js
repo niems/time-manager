@@ -2,10 +2,6 @@ import React from 'react';
 import {XYPlot, ArcSeries } from 'react-vis';
 import './style/taskArcDisplay.css';
 
-/*
-output hr/min/sec counting down before changing to ArcSeries
-*/
-
 const PI = Math.PI;
 
 const TaskArcDisplay = ({ theme, hr, min, sec }) => {

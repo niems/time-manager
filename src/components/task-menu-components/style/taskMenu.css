@@ -8,6 +8,18 @@
     }
 }
 
+@keyframes task-menu-exit {
+    from {
+        bottom: 0%;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 100%;
+        opacity: 1;
+    }
+}
+
 #task-menu-container { 
     width: inherit;
     height: 93%;       
@@ -29,6 +41,30 @@
     animation-name: task-menu-enter;
     animation-duration: 0.65s;
 }
+
+    #task-menu-container-leave {
+        /*fade out animation here*/
+        opacity: 0;
+        width: inherit;
+        height: 93%;       
+
+        position: absolute;
+        bottom: 0%;
+
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: center;
+
+        z-index: 5;
+        overflow: hidden;
+        opacity: 0.9;
+
+        background: var(--task-menu-bg);
+
+        animation-name: task-menu-exit;
+        animation-duration: 0.65s;
+    }
 
 #task-menu-options-container {
     box-sizing: border-box;

@@ -23,10 +23,10 @@ function isElectron() {
   
 const isElectronRunning = isElectron();
 
-function DisplayMenu({ displayMenu, allTasks, onTaskSelect, themeId, onThemeSelect, removeTask, onSave }) {
+function DisplayMenu({ taskMenuClass, displayMenu, allTasks, onTaskSelect, themeId, onThemeSelect, removeTask, onSave }) {
   if ( displayMenu ) { //if the menu should be displayed
     return (
-      <TaskMenu allTasks={allTasks} onTaskSelect={onTaskSelect} themeId={themeId} 
+      <TaskMenu taskMenuClass={taskMenuClass} allTasks={allTasks} onTaskSelect={onTaskSelect} themeId={themeId} 
                 onThemeSelect={onThemeSelect} removeTask={removeTask} onSave={onSave} />
     );
   }
@@ -70,6 +70,7 @@ class App extends Component {
 
       this.state = {
           displayMenu: false, //displays the task menu component
+          taskMenuClass: 'task-menu-container', //determines the task menu animation
 
           displayAddTask: false, //displays the task add component
           displayAddTaskSuccess: false, //displays successfully added task window
@@ -97,7 +98,10 @@ class App extends Component {
         ]
       };
 
-      this.onMenu = this.onMenu.bind(this); //toggles the task menu
+      this.onMenuEnter = this.onMenuEnter.bind(this); //task menu is displayed while mouse is inside
+      this.onMenuLeave = this.onMenuLeave.bind(this); //task menu is NOT displayed: mouse left menu area
+      this.onMenuToggle = this.onMenuToggle.bind(this); //toggles the task menu
+
       this.onToggleAddTask = this.onToggleAddTask.bind(this); //toggles the add task modal window
       this.createNewTask = this.createNewTask.bind(this); //creates new task based on add task window
       this.removeTask = this.removeTask.bind(this); //removes selected task from task menu
@@ -111,12 +115,33 @@ class App extends Component {
       this.onClose = this.onClose.bind(this); //closes electron
   }
 
-  onMenu(e) {
+  onMenuEnter(e) {
     e.preventDefault();
 
-    this.setState({
-      displayMenu: !this.state.displayMenu
-    });
+    if ( !this.state.displayMenu ) {
+      this.setState({ 
+        displayMenu: true,
+        taskMenuClass: 'task-menu-container'
+       });
+    }
+  }
+
+  onMenuLeave(e) {
+    e.preventDefault();
+
+    if ( this.state.displayMenu ) {
+      this.setState({ taskMenuClass: 'task-menu-container-leave' });
+
+      setTimeout( () => {
+        this.setState({ displayMenu: false });
+      }, 650);
+    }
+  }
+
+  onMenuToggle(e) {
+    e.preventDefault();
+    console.log('onMenuToggle()');
+    this.setState({ displayMenu: !this.state.displayMenu });
   }
 
   onToggleAddTask(e = undefined) {
@@ -262,8 +287,6 @@ class App extends Component {
         console.log('\n*ENTERING onTaskSelect()');
         console.log(`onTaskSelect selection: ${selectedId}`);
 
-        //if ( selectedId !== this.state.selectedTask.name ) { //selected task is not the same as the current task
-
         //if no selected task exists or the current selected task differs from the user selected task
         if ( ( typeof( this.state.selectedTask ) === 'undefined' ) || ( selectedId !== this.state.selectedTask.name ) ) {
           console.log('onTaskSelect(): new task selected - updating state');
@@ -359,9 +382,9 @@ class App extends Component {
     return (
         <div className='wrapper'>
             <link rel='stylesheet' href={this.state.theme.path} />
-            <Titlebar themeId={this.state.theme.id} onMenu={this.onMenu} onClose={this.onClose} />
+            <Titlebar themeId={this.state.theme.id} onMenuToggle={this.onMenuToggle} onClose={this.onClose} />
 
-            <DisplayMenu displayMenu={this.state.displayMenu} allTasks={this.state.allTasks} onTaskSelect={this.onTaskSelect}
+            <DisplayMenu taskMenuClass={this.state.taskMenuClass} displayMenu={this.state.displayMenu} allTasks={this.state.allTasks} onTaskSelect={this.onTaskSelect}
                          themeId={this.state.theme.id} onThemeSelect={this.onColorThemeSelect} removeTask={this.removeTask} />
             
             <DisplayAddTask themeId={this.state.theme.id} displayAddTask={this.state.displayAddTask} onClose={this.onToggleAddTask} createTask={this.createNewTask} />
